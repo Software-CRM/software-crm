@@ -1,0 +1,99 @@
+/* 
+  CABPTOID UNIFIED PORTAL STYLES 
+  This file handles the shared design system for Admin, Employee, and Client portals.
+*/
+
+:root {
+  --portal-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --accent-red: #ef4444;
+  --accent-slate: #334155;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.portal-wrapper {
+  padding: 2rem;
+  text-align: center;
+  min-height: 100vh;
+  background: var(--portal-bg);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Unified Header Bar */
+.portal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.2rem 2rem;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.portal-header h2 {
+  margin: 0;
+  color: var(--text-main);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* Universal Logout Button Styles */
+.portal-logout-btn {
+  padding: 0.7rem 1.5rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+}
+
+/* Role-Specific Button Variations */
+.portal-logout-btn.employee {
+  background: var(--accent-red);
+  color: white;
+}
+
+.portal-logout-btn.client {
+  background: var(--accent-slate);
+  color: white;
+}
+
+.portal-logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  filter: brightness(1.1);
+}
+
+/* Unified Content Cards */
+.portal-main-card {
+  margin-top: 2.5rem;
+  padding: 3rem;
+  background: var(--card-bg);
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  box-shadow: var(--shadow-md);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.portal-welcome-text {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
