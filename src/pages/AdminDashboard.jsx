@@ -1,13 +1,17 @@
+
+
+
 import React, { useState } from 'react';
-import { 
-  Bell, 
-  User as UserIcon, 
-  ChevronDown, 
-  Menu,
+
+import {
+  Bell,
+  User as UserIcon,
+  ChevronDown,
   Moon,
   Sun,
-  Calendar
+  Calendar,
 } from 'lucide-react';
+
 import { formatDate } from '../utils/dateUtils';
 import AdminSidebar from '../dashboards/admin/components/AdminSidebar';
 
@@ -24,85 +28,213 @@ import Logs from '../dashboards/admin/modules/Logs';
 
 import './AdminDashboard.css';
 
+
+
 const AdminDashboard = ({ user, onLogout }) => {
   const [activeTab, setActiveTab] = useState('overview');
+
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+  const toggleProfileMenu = () => {
+    setShowProfileMenu((prev) => !prev);
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'overview': return <DashboardOverview />;
-      case 'users': return <UserManagement />;
-      case 'company-settings': return <CompanySettings />;
-      case 'projects': return <ProjectManagement />;
-      case 'invoices': return <Invoices />;
-      case 'reports': return <Reports />;
-      case 'plans': return <Plans />;
-      case 'settings': return <GeneralSettings />;
-      case 'logs': return <Logs />;
-      default: return <DashboardOverview />;
+      case 'overview':
+        return <DashboardOverview />;
+
+      case 'users':
+        return <UserManagement />;
+
+      case 'projects':
+        return <ProjectManagement />;
+
+      case 'company-settings':
+        return <CompanySettings />;
+
+      case 'invoices':
+        return <Invoices />;
+
+      case 'reports':
+        return <Reports />;
+
+      case 'plans':
+        return <Plans />;
+
+      case 'settings':
+        return <GeneralSettings />;
+
+      case 'logs':
+        return <Logs />;
+
+      default:
+        return <DashboardOverview />;
     }
   };
 
   const getTabTitle = () => {
     const titles = {
       overview: 'Dashboard Overview',
+      users: 'User Management',
       projects: 'Project Management',
       'company-settings': 'Company Settings',
       invoices: 'Billing & Invoices',
       reports: 'Reports & Analytics',
       plans: 'Billing & Plans',
       settings: 'General Settings',
-      logs: 'System Logs'
+      logs: 'System Logs',
     };
+
     return titles[activeTab] || 'Admin Dashboard';
   };
 
   return (
     <div className={`dashboard-root ${isDarkMode ? 'dark-mode' : ''}`}>
-      <AdminSidebar 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
+      {/* SIDEBAR */}
+
+      <AdminSidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
         onLogout={onLogout}
       />
 
+      {/* MAIN CONTENT */}
+
       <div className="dashboard-main">
+        {/* TOPBAR */}
+
         <header className="dashboard-topbar">
           <div className="topbar-left">
             <h1 className="page-title">{getTabTitle()}</h1>
           </div>
 
           <div className="topbar-right">
-            <div className="topbar-date" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.9rem', marginRight: '1rem' }}>
+            {/* DATE */}
+
+            <div className="topbar-date">
               <Calendar size={16} />
+
               <span>{formatDate()}</span>
             </div>
+
+            {/* ACTIONS */}
+
             <div className="topbar-actions">
-              <button 
-                className="action-icon-btn" 
+              {/* DARK MODE */}
+
+              <button
+                className="action-icon-btn"
                 onClick={() => setIsDarkMode(!isDarkMode)}
               >
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
+
+              {/* NOTIFICATION */}
+
               <div className="notification-wrapper">
                 <button className="action-icon-btn">
                   <Bell size={20} />
+
                   <span className="notif-badge"></span>
                 </button>
               </div>
+
+              {/* DIVIDER */}
+
               <div className="v-divider" />
-              <div className="user-profile-dropdown">
-                <div className="avatar-small">
-                  <UserIcon size={18} />
+
+              {/* PROFILE */}
+
+              <div className="profile-wrapper">
+                <div
+                  className="user-profile-dropdown"
+                  onClick={toggleProfileMenu}
+                >
+                  <div className="avatar-small">
+                    <UserIcon size={18} />
+                  </div>
+
+                  <div className="user-info">
+                    <span className="u-name">
+                      {user?.fullName || 'Admin User'}
+                    </span>
+
+                    <span className="u-role">
+                      {user?.role || 'Administrator'}
+                    </span>
+                  </div>
+
+                  <ChevronDown
+                    size={14}
+                    className={`dropdown-arrow ${
+                      showProfileMenu ? 'rotate' : ''
+                    }`}
+                  />
                 </div>
-                <div className="user-info">
-                  <span className="u-name">{user?.fullName || 'Admin User'}</span>
-                  <span className="u-role">{user?.role || 'Administrator'}</span>
-                </div>
-                <ChevronDown size={14} className="dropdown-arrow" />
+
+          
+
+                
+                 {showProfileMenu && (
+  <div className="profile-menu">
+
+ 
+
+    <div className="profile-header">
+      <div className="profile-avatar">
+        <UserIcon size={28} />
+      </div>
+
+      <div>
+        <h4>
+          {user?.fullName || 'Admin User'}
+        </h4>
+
+        <p>
+          {user?.email || 'admin@crm.com'}
+        </p>
+      </div>
+    </div>
+
+ 
+
+    <button
+      className="menu-item"
+      onClick={() => {
+        setActiveTab('settings');
+        setShowProfileMenu(false);
+      }}
+    >
+      Profile
+    </button>
+
+
+
+   
+
+
+
+    <button
+      className="menu-item logout"
+      onClick={() => {
+        setShowProfileMenu(false);
+        onLogout();
+      }}
+    >
+      Logout
+    </button>
+
+  </div>
+)} 
               </div>
             </div>
           </div>
         </header>
+
+        {/* PAGE CONTENT */}
 
         <main className="dashboard-viewport">
           {renderTabContent()}
@@ -110,6 +242,6 @@ const AdminDashboard = ({ user, onLogout }) => {
       </div>
     </div>
   );
-}
+};
 
 export default AdminDashboard;
