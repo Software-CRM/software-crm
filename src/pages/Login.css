@@ -1,0 +1,473 @@
+.login-page-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: url('../assets/bg.png') no-repeat center center;
+  background-size: 110% 110%;
+  /* Extra size for the zoom effect */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  animation: bgZoom 30s infinite alternate ease-in-out;
+}
+
+/* Cinematic Overlays */
+.login-page-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+  /* Vignette */
+  pointer-events: none;
+  z-index: 0;
+}
+
+.login-page-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(0deg,
+      rgba(0, 0, 0, 0.03) 0px,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 2px);
+  /* Tech Scanlines */
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes bgZoom {
+  0% {
+    background-size: 100% 100%;
+  }
+
+  100% {
+    background-size: 115% 115%;
+  }
+}
+
+/* Remove CSS Blobs as we now have a real high-res image */
+.bg-blob-1,
+.bg-blob-2,
+.bg-blob-3,
+.bg-grid-overlay {
+  display: none;
+}
+
+.login-card-container {
+  width: 90%;
+  max-width: 1100px;
+  height: 85vh;
+  background: transparent;
+  /* No white background to leak through */
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  box-shadow: 0 50px 120px rgba(0, 0, 0, 0.4);
+  display: flex;
+  overflow: hidden;
+  /* Parent handles all rounding and clipping */
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Left Side: Hero Section */
+.login-hero-section {
+  flex: 1.1;
+  height: 100%;
+  /* Force absolute vertical fill */
+  min-height: 100%;
+  background-color: #000;
+  /* Base color seal */
+  background-image: url('../assets/hero.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.hero-glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px);
+  /* Slightly more blur for depth */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4rem;
+  /* Increased padding for better internal spacing */
+  border-radius: 32px;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.3) 60%);
+  transform: scale(1.1);
+  /* Force bleed past all edges */
+  z-index: 1;
+}
+
+.hero-content {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  user-select: none;
+  /* Prevent text selection cursor */
+  cursor: default;
+  /* Keep arrow cursor */
+}
+
+.hero-content h1 {
+  font-size: 3.2rem;
+  /* More balanced size */
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1.5px;
+  background: linear-gradient(to bottom right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  line-height: 1.7;
+  margin-bottom: 3.5rem;
+  font-weight: 400;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 4rem;
+}
+
+.hero-stat-item span {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary-light);
+  margin-bottom: 0.25rem;
+}
+
+.hero-stat-item p {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* Right Side: Form Section */
+.login-form-section {
+  flex: 1;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Back to perfect center */
+  align-items: center;
+  padding: 2rem;
+  /* Compact padding */
+  overflow: hidden;
+  /* No scrollbars */
+  position: relative;
+}
+
+.form-inner-container {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  /* Ultra tight gap */
+}
+
+.brand-header {
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: center;
+  /* Center the logo */
+}
+
+.form-brand-logo {
+  height: 65px;
+  /* Slightly larger for better visibility */
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+}
+
+.form-intro {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.form-intro h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.form-intro p {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.modern-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* Force all wrappers to be same width */
+}
+
+.input-icon {
+  position: absolute;
+  left: 1.1rem;
+  font-size: 1.1rem;
+  color: var(--primary);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 1.1rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  z-index: 2;
+  font-size: 1.1rem;
+}
+
+.toggle-password:hover {
+  opacity: 1;
+}
+
+.input-with-icon input {
+  flex: 1;
+  width: 100%;
+  padding: 1rem 1rem 1rem 3.5rem !important;
+  /* Slightly deeper padding for SVG icons */
+  border: 1.5px solid #e2e8f0;
+  /* Softer, professional slate border */
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #f8fafc;
+  /* Ultra-light slate background */
+  box-sizing: border-box;
+}
+
+.input-with-icon input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 4px 20px rgba(16, 44, 87, 0.08);
+  transform: translateY(-1px);
+}
+
+.form-extra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  width: 100%;
+  padding: 0;
+  /* Align perfectly with input edges */
+  margin-top: -0.5rem;
+  /* Tighten vertical rhythm */
+}
+
+.remember-me-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: #4b5563;
+}
+
+.modern-forgot-link {
+  color: var(--primary-light);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.modern-submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary) 0%, #0a1b35 100%);
+  color: white;
+  padding: 1.1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  /* Industrial highlight */
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(16, 44, 87, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modern-submit-btn:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 12px 25px rgba(16, 44, 87, 0.3);
+}
+
+.modern-submit-btn:active {
+  transform: translateY(0);
+}
+
+.modern-submit-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  pointer-events: none;
+}
+
+.modern-submit-btn:hover::after {
+  left: 100%;
+  top: 100%;
+}
+
+
+
+/* Alerts */
+.error-alert {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #fee2e2;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+.success-alert {
+  background: #f0fdf4;
+  color: #16a34a;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #dcfce7;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+@keyframes shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .login-card-container {
+    flex-direction: column;
+    height: auto;
+    width: 95%;
+    margin: 2rem 0;
+  }
+
+  .login-hero-section {
+    display: none;
+  }
+
+  .login-form-section {
+    padding: 3rem 2rem;
+  }
+}
