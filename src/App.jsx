@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 
@@ -9,6 +9,15 @@ import EmployeeDashboard from './pages/EmployeeDashboard';
 import ClientDashboard from './dashboards/client/pages/ClientDashboard';
 
 import './App.css';
+
+// Protected Route Component
+const ProtectedRoute = ({ children, allowedRoles, user }) => {
+  if (!user) return <Navigate to="/login" replace />;
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -24,15 +33,6 @@ function App() {
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem('user');
-  };
-
-  // Protected Route Component
-  const ProtectedRoute = ({ children, allowedRoles }) => {
-    if (!user) return <Navigate to="/login" replace />;
-    if (allowedRoles && !allowedRoles.includes(user.role)) {
-      return <Navigate to="/login" replace />;
-    }
-    return children;
   };
 
   return (
@@ -53,7 +53,7 @@ function App() {
           <Route
             path="/admin/dashboard"
             element={
-              <ProtectedRoute allowedRoles={['ADMIN']}>
+              <ProtectedRoute allowedRoles={['ADMIN']} user={user}>
                 <AdminDashboard user={user} onLogout={handleLogout} />
               </ProtectedRoute>
             }
@@ -63,7 +63,7 @@ function App() {
           <Route
             path="/manager-dashboard"
             element={
-              <ProtectedRoute allowedRoles={['MANAGER']}>
+              <ProtectedRoute allowedRoles={['MANAGER']} user={user}>
                 <ManagerDashboard user={user} onLogout={handleLogout} />
               </ProtectedRoute>
             }
@@ -73,7 +73,7 @@ function App() {
           <Route
             path="/workspace/tasks"
             element={
-              <ProtectedRoute allowedRoles={['EMPLOYEE']}>
+              <ProtectedRoute allowedRoles={['EMPLOYEE']} user={user}>
                 <EmployeeDashboard user={user} onLogout={handleLogout} />
               </ProtectedRoute>
             }
@@ -83,7 +83,7 @@ function App() {
           <Route
             path="/client/portal"
             element={
-              <ProtectedRoute allowedRoles={['CLIENT']}>
+              <ProtectedRoute allowedRoles={['CLIENT']} user={user}>
                 <ClientDashboard user={user} onLogout={handleLogout} />
               </ProtectedRoute>
             }

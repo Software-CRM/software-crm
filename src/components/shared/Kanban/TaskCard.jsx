@@ -6,8 +6,6 @@ import {
   MessageSquare, 
   MoreHorizontal,
   ChevronUp,
-  AlertCircle,
-  CheckCircle2,
   Trash2
 } from 'lucide-react';
 

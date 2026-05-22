@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
   Bell, 
   User as UserIcon, 
   ChevronDown, 
-  Menu,
   Moon,
   Sun,
   Calendar

@@ -93,7 +93,7 @@ export const CompanyProvider = ({ children }) => {
     return () => {
       signal.active = false;
     };
-  }, []);
+  }, [fetchSettings]);
 
   const updateSettings = useCallback((newSettings) => {
     setSettings(prev => ({ ...prev, ...newSettings }));

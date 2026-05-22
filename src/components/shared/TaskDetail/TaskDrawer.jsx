@@ -5,10 +5,7 @@ import {
   Clock, 
   User, 
   Tag, 
-  MessageSquare, 
   Paperclip, 
-  CheckSquare,
-  Activity,
   Send,
   MoreVertical
 } from 'lucide-react';

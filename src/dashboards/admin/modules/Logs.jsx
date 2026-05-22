@@ -1,6 +1,4 @@
-import React from 'react';
 import { 
-  Activity, 
   Terminal, 
   Monitor, 
   User as UserIcon, 
@@ -9,7 +7,6 @@ import {
   Download,
   Filter
 } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const logs = [
   { user: 'Admin User', action: 'Modified system settings', timestamp: '2026-05-06 10:45 AM', ip: '192.168.1.1', device: 'macOS / Chrome' },

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   Plus,
   Search,
-  Filter,
   Calendar,
   Shield,
   Briefcase,
@@ -19,6 +18,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { projectService } from '../../../services/projectService';
 import { userService } from '../../../services/userService';
 import './ProjectManagement.css';
+import { logActivity } from '../../../utils/activityLogger';
+
 
 const ProjectManagementTab = ({ showToast = (type, msg) => alert(msg) }) => {
   const [projects, setProjects] = useState([]);
@@ -27,13 +28,9 @@ const ProjectManagementTab = ({ showToast = (type, msg) => alert(msg) }) => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async (showLoading = false) => {
     try {
-      setLoading(true);
+      if (showLoading) setLoading(true);
       console.log("DEBUG: Starting fetchProjects...");
 
       const data = await projectService.getProjects();
@@ -55,14 +52,18 @@ const ProjectManagementTab = ({ showToast = (type, msg) => alert(msg) }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [showToast]);
+
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this project?")) return;
     try {
       await projectService.deleteProject(id);
       showToast('success', 'Project deleted successfully');
-      fetchProjects();
+      fetchProjects(true);
     } catch (err) {
       showToast('error', 'Delete failed: ' + err.message);
     }
@@ -153,7 +154,7 @@ const ProjectManagementTab = ({ showToast = (type, msg) => alert(msg) }) => {
         {isModalOpen && (
           <ProjectModal
             onClose={() => setIsModalOpen(false)}
-            onSuccess={() => { fetchProjects(); setIsModalOpen(false); }}
+            onSuccess={() => { fetchProjects(true); setIsModalOpen(false); }}
             initialData={selectedProject}
             isEditMode={isEditMode}
             showToast={showToast}
@@ -221,19 +222,13 @@ const ProjectModal = ({ onClose, onSuccess, initialData, isEditMode, showToast }
       manager: {
         id: emp.id,
         username: emp.username,
+        fullName: emp.fullName || emp.username,
         role: 'MANAGER'
       }
     }));
   };
 
-  const updateAssignment = (username, field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      assignments: prev.assignments.map(a =>
-        a.userId === username ? { ...a, [field]: value } : a
-      )
-    }));
-  };
+
 
   const handleSubmit = async () => {
     if (!formData.name || !formData.startDate || !formData.endDate) {
@@ -274,6 +269,15 @@ const ProjectModal = ({ onClose, onSuccess, initialData, isEditMode, showToast }
         await projectService.updateProject(initialData.id, payload);
       } else {
         await projectService.createProject(payload);
+        
+        try {
+          const currentUser = JSON.parse(localStorage.getItem('user'));
+          const adminName = currentUser?.fullName || currentUser?.username || 'Admin';
+          const managerName = formData.manager?.fullName || formData.manager?.username || 'Unassigned';
+          logActivity(adminName, ` created project ${formData.name} (Manager: ${managerName})`);
+        } catch (e) {
+          console.error('Failed to log project creation activity', e);
+        }
       }
 
       showToast('success', `Project ${isEditMode ? 'updated' : 'created'} successfully!`);

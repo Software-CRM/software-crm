@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Loader2, Zap } from 'lucide-react';
 import { sprintService } from '../../../services/sprintService';
 
@@ -11,14 +11,14 @@ const SprintManagement = ({ showToast }) => {
       try {
         const data = await sprintService.getAllSprints();
         setSprints(data);
-      } catch (err) {
+      } catch {
         showToast('error', 'Failed to fetch sprints');
       } finally {
         setLoading(false);
       }
     };
     fetchSprints();
-  }, []);
+  }, [showToast]);
 
   return (
     <div className="manager-tab-content">

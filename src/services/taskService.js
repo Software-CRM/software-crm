@@ -36,7 +36,7 @@ export const taskService = {
         const data = await apiFetch('/api/tasks/all');
         console.log('DEBUG: Raw Tasks Data from /api/tasks/all:', data);
         return taskService.extractTaskList(data);
-      } catch (err2) {
+      } catch {
         console.error('DEBUG: Both /api/tasks and /api/tasks/all failed.');
         throw err; // Throw the original error if fallback also fails
       }
@@ -115,12 +115,12 @@ export const taskService = {
     try {
       const data = await apiFetch(`/api/tasks/project/${projectId}`);
       return taskService.extractTaskList(data);
-    } catch (err) {
+    } catch {
       // Try alternative pattern if first fails
       try {
         const data = await apiFetch(`/api/projects/${projectId}/tasks`);
         return taskService.extractTaskList(data);
-      } catch (err2) {
+      } catch {
         return [];
       }
     }

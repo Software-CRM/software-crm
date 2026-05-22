@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Plus,
@@ -59,11 +59,7 @@ const KanbanBoard = ({ user }) => {
 
   const [employees, setEmployees] = useState([]);
 
-  useEffect(() => {
-    fetchTasks();
-  }, [user?.id]);
-
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
 
     try {
 
@@ -201,7 +197,11 @@ const KanbanBoard = ({ user }) => {
 
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   const handleCreateTask = async (taskData) => {
 
@@ -332,7 +332,7 @@ const KanbanBoard = ({ user }) => {
         );
       }
 
-    } catch (err) {
+    } catch {
 
       fetchTasks();
     }
@@ -359,7 +359,7 @@ const KanbanBoard = ({ user }) => {
 
       fetchTasks();
 
-    } catch (err) {
+    } catch {
 
       alert(
         'Delete failed'

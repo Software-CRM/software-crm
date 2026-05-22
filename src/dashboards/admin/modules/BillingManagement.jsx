@@ -1,14 +1,11 @@
-import React from 'react';
 import { 
   CreditCard, 
   Download, 
   ArrowUpCircle, 
   CheckCircle2, 
   Clock, 
-  AlertCircle,
-  ExternalLink
+  AlertCircle
 } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const invoices = [
   { id: 'INV-2026-001', date: 'May 01, 2026', amount: '$499.00', status: 'Paid', method: 'Visa •••• 4242' },

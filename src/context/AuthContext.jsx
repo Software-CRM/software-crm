@@ -1,26 +1,25 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  // Persistence: Restore user from localStorage on initial load/refresh
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
       try {
         const parsedUser = JSON.parse(savedUser);
-        setUser(parsedUser);
         console.log('[Auth] Session restored from storage:', parsedUser.username);
+        return parsedUser;
       } catch (err) {
         console.error('[Auth] Failed to parse saved user:', err);
         localStorage.removeItem('user');
       }
     }
-    setLoading(false);
-  }, []);
+    return null;
+  });
+  const loading = false;
+
 
   const login = (userData) => {
     setUser(userData);

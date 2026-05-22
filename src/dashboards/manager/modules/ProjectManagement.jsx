@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   Search, 
   Zap, 
@@ -15,13 +15,9 @@ const ManagerProjectsTab = ({ showToast }) => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async (showLoading = false) => {
     try {
-      setLoading(true);
+      if (showLoading) setLoading(true);
       console.log('DEBUG: Manual sync triggered for manager projects...');
       const data = await projectService.getManagerProjects();
       setProjects(data || []);
@@ -31,7 +27,11 @@ const ManagerProjectsTab = ({ showToast }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [showToast]);
+
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
 
   const filteredProjects = projects.filter(p => 
     (p.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||

@@ -35,7 +35,7 @@ export const apiFetch = async (url, options = {}) => {
 
   const text = await response.text();
 
-  let data = {};
+  let data;
 
   try {
     data = text ? JSON.parse(text) : {};

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
   User, 
   Lock, 
@@ -8,7 +8,6 @@ import {
   Save,
   Camera,
   Mail,
-  Globe,
   Smartphone,
   Fingerprint
 } from 'lucide-react';

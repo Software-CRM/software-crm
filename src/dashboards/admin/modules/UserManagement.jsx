@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   Search, 
   Filter, 
@@ -17,6 +17,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { userService } from '../../../services/userService';
 import UserDetailsDrawer from '../components/UserDetailsDrawer';
+import { logActivity } from '../../../utils/activityLogger';
+
 
 const UserManagementTab = () => {
   const [users, setUsers] = useState([]);
@@ -44,9 +46,14 @@ const UserManagementTab = () => {
   const [actionLoading, setActionLoading] = useState(false);
   const [toast, setToast] = useState(null);
 
-  const fetchUsers = async () => {
+  const showToast = useCallback((type, message) => {
+    setToast({ type, message });
+    setTimeout(() => setToast(null), 3000);
+  }, []);
+
+  const fetchUsers = useCallback(async (showLoading = false) => {
     try {
-      setLoading(true);
+      if (showLoading) setLoading(true);
       const data = await userService.getAllUsers();
       
       if (Array.isArray(data)) {
@@ -77,18 +84,11 @@ const UserManagementTab = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-
+  }, [showToast]);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
-
-  const showToast = (type, message) => {
-    setToast({ type, message });
-    setTimeout(() => setToast(null), 3000);
-  };
+  }, [fetchUsers]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -122,10 +122,20 @@ const UserManagementTab = () => {
         await userService.createEmployee(formData);
       }
       
+      
+      try {
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+        const adminName = currentUser?.fullName || currentUser?.username || 'Admin';
+        const roleStr = formData.role ? formData.role.toLowerCase() : 'user';
+        logActivity(adminName, ` created user ${formData.fullName || formData.username} (${roleStr})`);
+      } catch (err) {
+        console.error('Failed to log user creation activity:', err);
+      }
+
       showToast('success', `${formData.role.charAt(0) + formData.role.slice(1).toLowerCase()} Created Successfully`);
       setIsCreateModalOpen(false);
       resetForm();
-      fetchUsers();
+      fetchUsers(true);
     } catch (err) {
       console.error('Creation error:', err);
       showToast('error', err.message);
@@ -148,7 +158,7 @@ const UserManagementTab = () => {
       showToast('success', 'User Updated Successfully');
       setIsEditModalOpen(false);
       resetForm();
-      fetchUsers();
+      fetchUsers(true);
     } catch (err) {
       showToast('error', err.message);
     } finally {
@@ -168,7 +178,7 @@ const UserManagementTab = () => {
       showToast('success', 'User Deleted Successfully');
       setIsDeleteModalOpen(false);
       resetForm();
-      fetchUsers();
+      fetchUsers(true);
     } catch (err) {
       console.error('Delete error:', err);
       showToast('error', err.message);

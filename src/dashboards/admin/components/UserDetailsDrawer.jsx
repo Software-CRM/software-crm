@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, 
@@ -8,7 +8,6 @@ import {
   Calendar, 
   Shield, 
   Zap, 
-  CheckCircle2, 
   Clock, 
   Activity,
   User as UserIcon,
@@ -22,13 +21,7 @@ const UserDetailsDrawer = ({ isOpen, onClose, userId }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (isOpen && userId) {
-      fetchDetails();
-    }
-  }, [isOpen, userId]);
-
-  const fetchDetails = async () => {
+  const fetchDetails = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -40,7 +33,13 @@ const UserDetailsDrawer = ({ isOpen, onClose, userId }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
+
+  useEffect(() => {
+    if (isOpen && userId) {
+      fetchDetails();
+    }
+  }, [isOpen, userId, fetchDetails]);
 
   return (
     <AnimatePresence>
@@ -58,14 +57,14 @@ const UserDetailsDrawer = ({ isOpen, onClose, userId }) => {
           {/* Drawer Content */}
           <motion.div 
             className="user-details-drawer"
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 250 }}
           >
             <div className="drawer-header">
               <div className="header-title">
-                <h2>Employee Profile</h2>
+                <h2>{details?.role ? `${details.role.charAt(0).toUpperCase() + details.role.slice(1).toLowerCase()} Profile` : 'User Profile'}</h2>
                 <p>Detailed view of organization member</p>
               </div>
               <button className="close-drawer-btn" onClick={onClose}>
@@ -106,9 +105,9 @@ const UserDetailsDrawer = ({ isOpen, onClose, userId }) => {
                     </div>
                   </div>
 
-                  {/* Section 2: Employee Information */}
+                  {/* Section 2: User Information */}
                   <div className="details-section">
-                    <h4 className="section-title">Employee Information</h4>
+                    <h4 className="section-title">{details?.role ? `${details.role.charAt(0).toUpperCase() + details.role.slice(1).toLowerCase()} Information` : 'User Information'}</h4>
                     <div className="info-grid">
                       <div className="info-item">
                         <label><Mail size={14} /> Email</label>
@@ -131,7 +130,7 @@ const UserDetailsDrawer = ({ isOpen, onClose, userId }) => {
                         <span>{details.joiningDate || 'N/A'}</span>
                       </div>
                       <div className="info-item">
-                        <label><UserIcon size={14} /> Employee ID</label>
+                        <label><UserIcon size={14} /> {details?.role ? `${details.role.charAt(0).toUpperCase() + details.role.slice(1).toLowerCase()} ID` : 'User ID'}</label>
                         <span>#{details.id?.toString().padStart(4, '0')}</span>
                       </div>
                     </div>

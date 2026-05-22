@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   Plus, 
   Edit2, 
@@ -30,9 +30,9 @@ const TeamMembers = ({ showToast }) => {
     status: 'Active'
   });
 
-  const fetchEmployees = async () => {
+  const fetchEmployees = useCallback(async (showLoading = false) => {
     try {
-      setLoading(true);
+      if (showLoading) setLoading(true);
       const data = await userService.getAllUsers();
       if (Array.isArray(data)) {
         setEmployees(data.filter(u => u.role === 'EMPLOYEE'));
@@ -43,11 +43,11 @@ const TeamMembers = ({ showToast }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [showToast]);
 
   useEffect(() => {
     fetchEmployees();
-  }, []);
+  }, [fetchEmployees]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -77,7 +77,7 @@ const TeamMembers = ({ showToast }) => {
 
       showToast('success', `Employee ${isEditMode ? 'updated' : 'created'} successfully!`);
       setIsModalOpen(false);
-      fetchEmployees();
+      fetchEmployees(true);
       setFormData({ username: '', password: '', role: 'EMPLOYEE', status: 'Active' });
     } catch (err) {
       console.error('Operation failed:', err);
@@ -93,7 +93,7 @@ const TeamMembers = ({ showToast }) => {
       await userService.deleteUser(selectedEmp.id);
       showToast('success', 'Employee deleted successfully');
       setIsDeleteModalOpen(false);
-      fetchEmployees();
+      fetchEmployees(true);
     } catch (err) {
       console.error('Error deleting employee:', err);
       showToast('error', err.message);

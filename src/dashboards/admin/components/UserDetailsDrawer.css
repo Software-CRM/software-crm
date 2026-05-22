@@ -6,18 +6,21 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
-  z-index: 1000;
+  z-index: 10000;
 }
 
 .user-details-drawer {
   position: fixed;
-  top: 0;
+  top: 40px;
+  bottom: 40px;
+  left: 0;
   right: 0;
-  width: 480px;
-  height: 100%;
+  margin: auto;
+  width: min(480px, calc(100% - 32px));
   background: #ffffff;
-  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-  z-index: 1001;
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.18);
+  z-index: 10001;
   display: flex;
   flex-direction: column;
 }
@@ -260,6 +263,9 @@
 
 @media (max-width: 500px) {
   .user-details-drawer {
-    width: 100%;
+    top: 20px;
+    bottom: 20px;
+    width: calc(100% - 24px);
+    border-radius: 16px;
   }
 }

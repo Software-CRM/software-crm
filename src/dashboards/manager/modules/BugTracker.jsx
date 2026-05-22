@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Bug } from 'lucide-react';
 import { bugService } from '../../../services/pmsService';
 
@@ -11,14 +11,14 @@ const BugTracker = ({ showToast }) => {
       try {
         const data = await bugService.getAllBugs();
         setBugs(data);
-      } catch (err) {
+      } catch {
         showToast('error', 'Failed to fetch bugs');
       } finally {
         setLoading(false);
       }
     };
     fetchBugs();
-  }, []);
+  }, [showToast]);
 
   return (
     <div className="manager-tab-content">

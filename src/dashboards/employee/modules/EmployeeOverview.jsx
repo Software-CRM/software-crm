@@ -1,9 +1,7 @@
-import React from 'react';
 import { 
   RefreshCw, 
   CheckSquare, 
   ArrowRight, 
-  Clock, 
   Zap, 
   Calendar,
   MoreVertical,
