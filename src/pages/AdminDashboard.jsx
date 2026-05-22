@@ -1,6 +1,5 @@
 
 
-
 // import React, { useState } from 'react';
 
 // import {
@@ -10,9 +9,16 @@
 //   Moon,
 //   Sun,
 //   Calendar,
+//   X,
+//   Mail,
+//   Briefcase,
+//   Edit,
+//   Save,
+//   Camera,
 // } from 'lucide-react';
 
 // import { formatDate } from '../utils/dateUtils';
+
 // import AdminSidebar from '../dashboards/admin/components/AdminSidebar';
 
 // // Modular Dashboard Components
@@ -28,21 +34,53 @@
 
 // import './AdminDashboard.css';
 
-
-
 // const AdminDashboard = ({ user, onLogout }) => {
+
 //   const [activeTab, setActiveTab] = useState('overview');
 
 //   const [isDarkMode, setIsDarkMode] = useState(false);
 
 //   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
+//   const [showProfileModal, setShowProfileModal] = useState(false);
+
+//   const [isEditingProfile, setIsEditingProfile] = useState(false);
+
+//   const [profileData, setProfileData] = useState({
+//     fullName: user?.fullName || 'Admin User',
+//     email: user?.email || 'admin@crm.com',
+//     role: user?.role || 'Administrator',
+//   });
+
 //   const toggleProfileMenu = () => {
 //     setShowProfileMenu((prev) => !prev);
 //   };
 
+//   // HANDLE PROFILE INPUTS
+
+//   const handleProfileChange = (e) => {
+//     setProfileData({
+//       ...profileData,
+//       [e.target.name]: e.target.value,
+//     });
+//   };
+
+//   // SAVE PROFILE
+
+//   const handleSaveProfile = () => {
+//     setIsEditingProfile(false);
+
+//     // Optional Backend API
+//     // await api.put("/profile/update", profileData)
+
+//     alert('Profile Updated Successfully');
+//   };
+
+//   // RENDER TABS
+
 //   const renderTabContent = () => {
 //     switch (activeTab) {
+
 //       case 'overview':
 //         return <DashboardOverview />;
 
@@ -75,7 +113,10 @@
 //     }
 //   };
 
+//   // PAGE TITLE
+
 //   const getTabTitle = () => {
+
 //     const titles = {
 //       overview: 'Dashboard Overview',
 //       users: 'User Management',
@@ -92,7 +133,9 @@
 //   };
 
 //   return (
+
 //     <div className={`dashboard-root ${isDarkMode ? 'dark-mode' : ''}`}>
+
 //       {/* SIDEBAR */}
 
 //       <AdminSidebar
@@ -101,45 +144,55 @@
 //         onLogout={onLogout}
 //       />
 
-//       {/* MAIN CONTENT */}
+//       {/* MAIN */}
 
 //       <div className="dashboard-main">
+
 //         {/* TOPBAR */}
 
 //         <header className="dashboard-topbar">
+
 //           <div className="topbar-left">
-//             <h1 className="page-title">{getTabTitle()}</h1>
+//             <h1 className="page-title">
+//               {getTabTitle()}
+//             </h1>
 //           </div>
 
 //           <div className="topbar-right">
+
 //             {/* DATE */}
 
 //             <div className="topbar-date">
 //               <Calendar size={16} />
-
 //               <span>{formatDate()}</span>
 //             </div>
 
 //             {/* ACTIONS */}
 
 //             <div className="topbar-actions">
+
 //               {/* DARK MODE */}
 
 //               <button
 //                 className="action-icon-btn"
 //                 onClick={() => setIsDarkMode(!isDarkMode)}
 //               >
-//                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+//                 {isDarkMode ? (
+//                   <Sun size={20} />
+//                 ) : (
+//                   <Moon size={20} />
+//                 )}
 //               </button>
 
-//               {/* NOTIFICATION */}
+//               {/* NOTIFICATIONS */}
 
 //               <div className="notification-wrapper">
+
 //                 <button className="action-icon-btn">
 //                   <Bell size={20} />
-
 //                   <span className="notif-badge"></span>
 //                 </button>
+
 //               </div>
 
 //               {/* DIVIDER */}
@@ -149,22 +202,26 @@
 //               {/* PROFILE */}
 
 //               <div className="profile-wrapper">
+
 //                 <div
 //                   className="user-profile-dropdown"
 //                   onClick={toggleProfileMenu}
 //                 >
+
 //                   <div className="avatar-small">
 //                     <UserIcon size={18} />
 //                   </div>
 
 //                   <div className="user-info">
+
 //                     <span className="u-name">
-//                       {user?.fullName || 'Admin User'}
+//                       {profileData.fullName}
 //                     </span>
 
 //                     <span className="u-role">
-//                       {user?.role || 'Administrator'}
+//                       {profileData.role}
 //                     </span>
+
 //                   </div>
 
 //                   <ChevronDown
@@ -173,62 +230,63 @@
 //                       showProfileMenu ? 'rotate' : ''
 //                     }`}
 //                   />
+
 //                 </div>
 
-          
+//                 {/* PROFILE MENU */}
 
-                
-//                  {showProfileMenu && (
-//   <div className="profile-menu">
+//                 {showProfileMenu && (
 
- 
+//                   <div className="profile-menu">
 
-//     <div className="profile-header">
-//       <div className="profile-avatar">
-//         <UserIcon size={28} />
-//       </div>
+//                     {/* HEADER */}
 
-//       <div>
-//         <h4>
-//           {user?.fullName || 'Admin User'}
-//         </h4>
+//                     <div className="profile-header">
 
-//         <p>
-//           {user?.email || 'admin@crm.com'}
-//         </p>
-//       </div>
-//     </div>
+//                       <div className="profile-avatar">
+//                         <UserIcon size={28} />
+//                       </div>
 
- 
+//                       <div>
 
-//     <button
-//       className="menu-item"
-//       onClick={() => {
-//         setActiveTab('settings');
-//         setShowProfileMenu(false);
-//       }}
-//     >
-//       Profile
-//     </button>
+//                         <h4>
+//                           {profileData.fullName}
+//                         </h4>
 
+//                         <p>
+//                           {profileData.email}
+//                         </p>
 
+//                       </div>
 
-   
+//                     </div>
 
+//                     {/* PROFILE BUTTON */}
 
+//                     <button
+//                       className="menu-item"
+//                       onClick={() => {
+//                         setShowProfileModal(true);
+//                         setShowProfileMenu(false);
+//                       }}
+//                     >
+//                       Profile
+//                     </button>
 
-//     <button
-//       className="menu-item logout"
-//       onClick={() => {
-//         setShowProfileMenu(false);
-//         onLogout();
-//       }}
-//     >
-//       Logout
-//     </button>
+//                     {/* LOGOUT */}
 
-//   </div>
-// )} 
+//                     <button
+//                       className="menu-item logout"
+//                       onClick={() => {
+//                         setShowProfileMenu(false);
+//                         onLogout();
+//                       }}
+//                     >
+//                       Logout
+//                     </button>
+
+//                   </div>
+//                 )}
 //               </div>
 //             </div>
 //           </div>
@@ -239,14 +297,167 @@
 //         <main className="dashboard-viewport">
 //           {renderTabContent()}
 //         </main>
+
 //       </div>
+
+//       {/* PROFILE MODAL */}
+
+//       {showProfileModal && (
+
+//         <div className="profile-modal-overlay">
+
+//           <div className="profile-modal">
+
+//             {/* HEADER */}
+
+//             <div className="profile-modal-header">
+
+//               <h2>User Profile</h2>
+
+//               <button
+//                 className="close-profile-btn"
+//                 onClick={() => {
+//                   setShowProfileModal(false);
+//                   setIsEditingProfile(false);
+//                 }}
+//               >
+//                 <X size={20} />
+//               </button>
+
+//             </div>
+
+//             {/* AVATAR */}
+
+//             <div className="profile-avatar-large">
+//               <UserIcon size={45} />
+//             </div>
+
+//             {/* PROFILE CONTENT */}
+
+//             <div className="profile-modal-content">
+
+//               {/* NAME */}
+
+//               <div className="profile-field">
+
+//                 <label>
+//                   <UserIcon size={16} />
+//                   Full Name
+//                 </label>
+
+//                 {isEditingProfile ? (
+
+//                   <input
+//                     type="text"
+//                     name="fullName"
+//                     value={profileData.fullName}
+//                     onChange={handleProfileChange}
+//                   />
+
+//                 ) : (
+
+//                   <p>{profileData.fullName}</p>
+
+//                 )}
+
+//               </div>
+
+//               {/* EMAIL */}
+
+//               <div className="profile-field">
+
+//                 <label>
+//                   <Mail size={16} />
+//                   Email
+//                 </label>
+
+//                 {isEditingProfile ? (
+
+//                   <input
+//                     type="email"
+//                     name="email"
+//                     value={profileData.email}
+//                     onChange={handleProfileChange}
+//                   />
+
+//                 ) : (
+
+//                   <p>{profileData.email}</p>
+
+//                 )}
+
+//               </div>
+
+//               {/* ROLE */}
+
+//               <div className="profile-field">
+
+//                 <label>
+//                   <Briefcase size={16} />
+//                   Designation
+//                 </label>
+
+//                 {isEditingProfile ? (
+
+//                   <input
+//                     type="text"
+//                     name="role"
+//                     value={profileData.role}
+//                     onChange={handleProfileChange}
+//                   />
+
+//                 ) : (
+
+//                   <p>{profileData.role}</p>
+
+//                 )}
+
+//               </div>
+
+//               {/* ACTION BUTTONS */}
+
+//               <div className="profile-modal-actions">
+
+//                 {!isEditingProfile ? (
+
+//                   <button
+//                     className="edit-profile-btn"
+//                     onClick={() => setIsEditingProfile(true)}
+//                   >
+//                     <Edit size={16} />
+//                     Edit Profile
+//                   </button>
+
+//                 ) : (
+
+//                   <button
+//                     className="save-profile-btn"
+//                     onClick={handleSaveProfile}
+//                   >
+//                     <Save size={16} />
+//                     Save Changes
+//                   </button>
+
+//                 )}
+
+//               </div>
+
+//             </div>
+
+//           </div>
+
+//         </div>
+
+//       )}
+
 //     </div>
 //   );
 // };
 
-// export default AdminDashboard;
+// export default AdminDashboard;                            
 
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 
 import {
   Bell,
@@ -258,15 +469,14 @@ import {
   X,
   Mail,
   Briefcase,
-  Edit,
-  Save,
+    Fingerprint,
 } from 'lucide-react';
 
 import { formatDate } from '../utils/dateUtils';
 
 import AdminSidebar from '../dashboards/admin/components/AdminSidebar';
 
-// Modular Dashboard Components
+// MODULES
 import DashboardOverview from '../dashboards/admin/modules/DashboardOverview';
 import UserManagement from '../dashboards/admin/modules/UserManagement';
 import ProjectManagement from '../dashboards/admin/modules/ProjectManagement';
@@ -279,7 +489,7 @@ import Logs from '../dashboards/admin/modules/Logs';
 
 import './AdminDashboard.css';
 
-const AdminDashboard = ({ user, onLogout }) => {
+const AdminDashboard = ({ user, onLogout, onUserUpdate }) => {
 
   const [activeTab, setActiveTab] = useState('overview');
 
@@ -289,39 +499,30 @@ const AdminDashboard = ({ user, onLogout }) => {
 
   const [showProfileModal, setShowProfileModal] = useState(false);
 
-  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  // CENTRALIZED PROFILE STATE
 
   const [profileData, setProfileData] = useState({
     fullName: user?.fullName || 'Admin User',
     email: user?.email || 'admin@crm.com',
     role: user?.role || 'Administrator',
+    profileImage: user?.profileImage || '',
   });
+
+  // Keep local profileData in sync when parent `user` prop changes
+  useEffect(() => {
+    setProfileData((prev) => ({
+      fullName: user?.fullName || prev.fullName,
+      email: user?.email || prev.email,
+      role: user?.role || prev.role,
+      profileImage: user?.profileImage || prev.profileImage,
+    }));
+  }, [user]);
 
   const toggleProfileMenu = () => {
     setShowProfileMenu((prev) => !prev);
   };
 
-  // HANDLE PROFILE INPUTS
-
-  const handleProfileChange = (e) => {
-    setProfileData({
-      ...profileData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  // SAVE PROFILE
-
-  const handleSaveProfile = () => {
-    setIsEditingProfile(false);
-
-    // Optional Backend API
-    // await api.put("/profile/update", profileData)
-
-    alert('Profile Updated Successfully');
-  };
-
-  // RENDER TABS
+  // RENDER MODULES
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -348,7 +549,15 @@ const AdminDashboard = ({ user, onLogout }) => {
         return <Plans />;
 
       case 'settings':
-        return <GeneralSettings />;
+        return (
+          <GeneralSettings
+            profileData={profileData}
+            setProfileData={setProfileData}
+            isDarkMode={isDarkMode}
+            setIsDarkMode={setIsDarkMode}
+            onUserUpdate={onUserUpdate}
+          />
+        );
 
       case 'logs':
         return <Logs />;
@@ -440,8 +649,6 @@ const AdminDashboard = ({ user, onLogout }) => {
 
               </div>
 
-              {/* DIVIDER */}
-
               <div className="v-divider" />
 
               {/* PROFILE */}
@@ -453,8 +660,24 @@ const AdminDashboard = ({ user, onLogout }) => {
                   onClick={toggleProfileMenu}
                 >
 
+                  {/* PROFILE IMAGE */}
+
                   <div className="avatar-small">
-                    <UserIcon size={18} />
+
+                    {profileData.profileImage ? (
+
+                      <img
+                        src={profileData.profileImage}
+                        alt="Profile"
+                        className="profile-img-small"
+                      />
+
+                    ) : (
+
+                      <UserIcon size={18} />
+
+                    )}
+
                   </div>
 
                   <div className="user-info">
@@ -484,12 +707,24 @@ const AdminDashboard = ({ user, onLogout }) => {
 
                   <div className="profile-menu">
 
-                    {/* HEADER */}
-
                     <div className="profile-header">
 
                       <div className="profile-avatar">
-                        <UserIcon size={28} />
+
+                        {profileData.profileImage ? (
+
+                          <img
+                            src={profileData.profileImage}
+                            alt="Profile"
+                            className="profile-img-large"
+                          />
+
+                        ) : (
+
+                          <UserIcon size={28} />
+
+                        )}
+
                       </div>
 
                       <div>
@@ -506,7 +741,7 @@ const AdminDashboard = ({ user, onLogout }) => {
 
                     </div>
 
-                    {/* PROFILE BUTTON */}
+                    {/* PROFILE */}
 
                     <button
                       className="menu-item"
@@ -515,7 +750,7 @@ const AdminDashboard = ({ user, onLogout }) => {
                         setShowProfileMenu(false);
                       }}
                     >
-                      Profile
+                      View Profile
                     </button>
 
                     {/* LOGOUT */}
@@ -537,7 +772,7 @@ const AdminDashboard = ({ user, onLogout }) => {
           </div>
         </header>
 
-        {/* PAGE CONTENT */}
+        {/* CONTENT */}
 
         <main className="dashboard-viewport">
           {renderTabContent()}
@@ -546,146 +781,144 @@ const AdminDashboard = ({ user, onLogout }) => {
       </div>
 
       {/* PROFILE MODAL */}
+{showProfileModal && (
 
-      {showProfileModal && (
+  <div className="profile-modal-overlay">
 
-        <div className="profile-modal-overlay">
+    <div className="profile-modal modern-profile-modal">
 
-          <div className="profile-modal">
+      {/* CLOSE BUTTON */}
 
-            {/* HEADER */}
+      <button
+        className="close-profile-btn modern-close-btn"
+        onClick={() => setShowProfileModal(false)}
+      >
+        <X size={20} />
+      </button>
 
-            <div className="profile-modal-header">
+      {/* TOP COVER */}
 
-              <h2>User Profile</h2>
+      <div className="profile-cover-gradient"></div>
 
-              <button
-                className="close-profile-btn"
-                onClick={() => {
-                  setShowProfileModal(false);
-                  setIsEditingProfile(false);
-                }}
-              >
-                <X size={20} />
-              </button>
+      {/* PROFILE HEADER */}
+
+      <div className="profile-header-modern">
+
+        <div className="profile-avatar-wrapper-modern">
+
+          {profileData.profileImage ? (
+
+            <img
+              src={profileData.profileImage}
+              alt="Profile"
+              className="profile-modal-image"
+            />
+
+          ) : (
+
+            <div className="fallback-avatar-text">
+              {profileData.fullName?.charAt(0)}
+            </div>
+
+          )}
+
+          <span className="online-status-dot"></span>
+
+        </div>
+
+        <div className="profile-main-info">
+
+          {/* <h2 className="profile-user-name">
+            {profileData.fullName}
+          </h2> */}
+
+          <p className="profile-user-role">
+            {profileData.role}
+          </p>
+
+          <div className="profile-status-badge">
+            Active Administrator
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* BODY */}
+
+      <div className="profile-body-content">
+
+        {/* INFO GRID */}
+
+        <div className="profile-info-grid">
+
+          {/* EMAIL */}
+
+          <div className="profile-info-card">
+
+            <div className="info-icon-box">
+              <Mail size={18} />
+            </div>
+
+            <div className="info-content">
+
+              <span>Email Address</span>
+
+              <p>{profileData.email}</p>
 
             </div>
 
-            {/* AVATAR */}
+          </div>
 
-            <div className="profile-avatar-large">
-              <UserIcon size={45} />
+          {/* ROLE */}
+
+          <div className="profile-info-card">
+
+            <div className="info-icon-box">
+              <Briefcase size={18} />
             </div>
 
-            {/* PROFILE CONTENT */}
+            <div className="info-content">
 
-            <div className="profile-modal-content">
+              <span>Designation</span>
 
-              {/* NAME */}
+              <p>{profileData.role}</p>
 
-              <div className="profile-field">
+            </div>
 
-                <label>
-                  <UserIcon size={16} />
-                  Full Name
-                </label>
+          </div>
 
-                {isEditingProfile ? (
+          {/* FULL NAME */}
 
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={profileData.fullName}
-                    onChange={handleProfileChange}
-                  />
+          <div className="profile-info-card">
 
-                ) : (
+            <div className="info-icon-box">
+              <UserIcon size={18} />
+            </div>
 
-                  <p>{profileData.fullName}</p>
+            <div className="info-content">
 
-                )}
+              <span>Full Name</span>
 
-              </div>
+              <p>{profileData.fullName}</p>
 
-              {/* EMAIL */}
+            </div>
 
-              <div className="profile-field">
+          </div>
 
-                <label>
-                  <Mail size={16} />
-                  Email
-                </label>
+          {/* USER ID */}
 
-                {isEditingProfile ? (
+          <div className="profile-info-card">
 
-                  <input
-                    type="email"
-                    name="email"
-                    value={profileData.email}
-                    onChange={handleProfileChange}
-                  />
+            <div className="info-icon-box">
+              <Fingerprint size={18} />
+            </div>
 
-                ) : (
+            <div className="info-content">
 
-                  <p>{profileData.email}</p>
+              <span>User ID</span>
 
-                )}
-
-              </div>
-
-              {/* ROLE */}
-
-              <div className="profile-field">
-
-                <label>
-                  <Briefcase size={16} />
-                  Designation
-                </label>
-
-                {isEditingProfile ? (
-
-                  <input
-                    type="text"
-                    name="role"
-                    value={profileData.role}
-                    onChange={handleProfileChange}
-                  />
-
-                ) : (
-
-                  <p>{profileData.role}</p>
-
-                )}
-
-              </div>
-
-              {/* ACTION BUTTONS */}
-
-              <div className="profile-modal-actions">
-
-                {!isEditingProfile ? (
-
-                  <button
-                    className="edit-profile-btn"
-                    onClick={() => setIsEditingProfile(true)}
-                  >
-                    <Edit size={16} />
-                    Edit Profile
-                  </button>
-
-                ) : (
-
-                  <button
-                    className="save-profile-btn"
-                    onClick={handleSaveProfile}
-                  >
-                    <Save size={16} />
-                    Save Changes
-                  </button>
-
-                )}
-
-              </div>
+              <p>ADM-2026-001</p>
 
             </div>
 
@@ -693,10 +926,40 @@ const AdminDashboard = ({ user, onLogout }) => {
 
         </div>
 
-      )}
+        {/* FOOTER */}
 
+        <div className="profile-footer-section">
+
+          <div className="profile-footer-card">
+
+            <span>Member Since</span>
+
+            <p>January 2026</p>
+
+          </div>
+
+          <div className="profile-footer-card">
+
+            <span>Account Status</span>
+
+            <p className="active-text">
+              Verified & Active
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+)}
     </div>
   );
 };
 
 export default AdminDashboard;
+

@@ -6,12 +6,16 @@ export const apiFetch = async (url, options = {}) => {
 
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user?.token;
+  const isFormData = options.body instanceof FormData;
 
   const headers = {
-    'Content-Type': 'application/json',
     'ngrok-skip-browser-warning': '69420',
     ...options.headers,
   };
+
+  if (!isFormData) {
+    headers['Content-Type'] = 'application/json';
+  }
 
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
@@ -20,9 +24,10 @@ export const apiFetch = async (url, options = {}) => {
   const response = await fetch(url, {
     ...options,
     headers,
-
     body: options.body
-      ? JSON.stringify(options.body)
+      ? isFormData
+        ? options.body
+        : JSON.stringify(options.body)
       : undefined,
   });
 
