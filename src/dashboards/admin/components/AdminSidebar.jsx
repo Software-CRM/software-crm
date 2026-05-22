@@ -76,6 +76,8 @@ const AdminSidebar = ({ activeTab, setActiveTab, onLogout }) => {
           <Settings className="nav-icon" size={20} />
           <span className="nav-label">Settings</span>
         </button>
+
+      
         <button className="nav-link logout-btn" onClick={onLogout}>
           <LogOut className="nav-icon" size={20} />
           <span className="nav-label">Logout</span>
