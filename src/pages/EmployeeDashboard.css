@@ -425,6 +425,10 @@
   margin-top: 24px;
   display: flex;
   gap: 12px;
+}
+
+.chat-input input {
+  flex: 1;
   padding: 12px 16px;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
@@ -511,4 +515,314 @@
   background: #3b82f6;
   border-radius: 8px 8px 0 0;
   transition: height 0.5s ease;
+}
+
+/* ==========================================
+   Dark Mode Premium Overrides
+   ========================================== */
+[data-theme='dark'] .employee-portal-container {
+  background: var(--bg-main);
+}
+
+[data-theme='dark'] .employee-main-content {
+  background-color: var(--bg-main) !important;
+}
+
+[data-theme='dark'] .employee-top-header {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+
+[data-theme='dark'] .workspace-title h2 {
+  color: var(--text-main);
+}
+
+[data-theme='dark'] .employee-id-badge {
+  border-left: 1px solid var(--border);
+}
+
+[data-theme='dark'] .e-avatar {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+[data-theme='dark'] .e-name {
+  color: var(--text-main);
+}
+
+[data-theme='dark'] .main-tasks-card,
+[data-theme='dark'] .productivity-card,
+[data-theme='dark'] .report-form-card,
+[data-theme='dark'] .attendance-history-card,
+[data-theme='dark'] .channels-card,
+[data-theme='dark'] .chat-card,
+[data-theme='dark'] .stat-card,
+[data-theme='dark'] .performance-chart-card {
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+
+[data-theme='dark'] .task-row {
+  background: var(--bg-main);
+}
+
+[data-theme='dark'] .task-row:hover {
+  background: var(--bg-card);
+  border-color: var(--border);
+}
+
+[data-theme='dark'] .task-title,
+[data-theme='dark'] .score-value,
+[data-theme='dark'] .time-display,
+[data-theme='dark'] .ps-box span,
+[data-theme='dark'] .stat-value {
+  color: var(--text-main);
+}
+
+[data-theme='dark'] .score-ring {
+  border-color: var(--bg-main);
+  border-top-color: var(--primary-light);
+}
+
+[data-theme='dark'] .punch-panel {
+  background: var(--bg-card);
+}
+
+[data-theme='dark'] .punch-btn.out {
+  background: var(--bg-main);
+  border-color: #ef4444;
+}
+
+[data-theme='dark'] .form-group label {
+  color: var(--text-muted);
+}
+
+[data-theme='dark'] .form-group textarea,
+[data-theme='dark'] .form-group input,
+[data-theme='dark'] .chat-input input {
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text-main);
+}
+
+[data-theme='dark'] .horizontal-tabs-container {
+  background: var(--bg-card);
+}
+
+[data-theme='dark'] .h-tab {
+  color: var(--text-muted);
+}
+
+[data-theme='dark'] .h-tab:hover {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+[data-theme='dark'] .h-tab.active {
+  background: var(--text-main);
+  color: var(--bg-main);
+}
+
+[data-theme='dark'] .channel-item {
+  color: var(--text-muted);
+}
+
+[data-theme='dark'] .channel-item.active {
+  background: var(--bg-main);
+  color: var(--primary-light);
+}
+
+[data-theme='dark'] .chat-header {
+  border-bottom: 1px solid var(--border);
+}
+
+[data-theme='dark'] .message-bubble {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+[data-theme='dark'] .message-bubble.own {
+  background: var(--primary-light);
+  color: white;
+}
+
+[data-theme='dark'] .chat-input {
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+}
+
+[data-theme='dark'] .placeholder-chart {
+  border-bottom: 2px solid var(--border);
+}
+
+/* ==============================================
+   .dark-mode class overrides (mirrors data-theme)
+   ============================================== */
+.dark-mode {
+  --bg-main: #0F172A;
+  --bg-card: #1E293B;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --border: #334155;
+  --shadow-card: 0 4px 6px rgba(0,0,0,0.3);
+  --input-bg: #0F172A;
+}
+
+/* Root containers */
+.dark-mode .employee-portal-container {
+  background: #0F172A;
+}
+
+.dark-mode .employee-main-content {
+  background-color: #0F172A !important;
+}
+
+.dark-mode .employee-top-header {
+  background: #1E293B !important;
+  border-bottom: 1px solid #334155 !important;
+}
+
+/* ALL text in dark mode defaults to white */
+.dark-mode .employee-portal-container {
+  color: #F8FAFC !important;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .workspace-title h2,
+.dark-mode .task-title,
+.dark-mode .score-value,
+.dark-mode .time-display,
+.dark-mode .ps-box span,
+.dark-mode .stat-value,
+.dark-mode .e-name {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .stat-label,
+.dark-mode .due,
+.dark-mode .location-info,
+.dark-mode .ps-box p,
+.dark-mode .date-display {
+  color: #94A3B8 !important;
+}
+
+/* Cards */
+.dark-mode .main-tasks-card,
+.dark-mode .productivity-card,
+.dark-mode .report-form-card,
+.dark-mode .attendance-history-card,
+.dark-mode .channels-card,
+.dark-mode .chat-card,
+.dark-mode .stat-card,
+.dark-mode .performance-chart-card,
+.dark-mode .punch-panel {
+  background: #1E293B !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Task rows */
+.dark-mode .task-row {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .task-row:hover {
+  background: #1E293B !important;
+  border-color: #3B82F6 !important;
+}
+
+/* Tabs */
+.dark-mode .horizontal-tabs-container {
+  background: #1E293B !important;
+}
+
+.dark-mode .h-tab {
+  color: #94A3B8 !important;
+}
+
+.dark-mode .h-tab:hover {
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .h-tab.active {
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* Channels */
+.dark-mode .channel-item {
+  color: #94A3B8 !important;
+}
+
+.dark-mode .channel-item.active {
+  background: #0F172A !important;
+  color: #3B82F6 !important;
+}
+
+/* Chat */
+.dark-mode .chat-header {
+  border-bottom: 1px solid #334155 !important;
+}
+
+.dark-mode .message-bubble {
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .message-bubble.own {
+  background: #3B82F6 !important;
+  color: white !important;
+}
+
+.dark-mode .chat-input input {
+  border: 1px solid #334155 !important;
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+/* Score ring */
+.dark-mode .score-ring {
+  border-color: #0F172A !important;
+  border-top-color: #3B82F6 !important;
+}
+
+/* Punch button */
+.dark-mode .punch-btn.out {
+  background: #0F172A !important;
+  border-color: #EF4444 !important;
+}
+
+/* Forms */
+.dark-mode .form-group label {
+  color: #94A3B8 !important;
+}
+
+.dark-mode .form-group textarea,
+.dark-mode .form-group input {
+  border: 1px solid #334155 !important;
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+/* Employee badge */
+.dark-mode .employee-id-badge {
+  border-left: 1px solid #334155 !important;
+}
+
+.dark-mode .e-avatar {
+  background: #0F172A !important;
+}
+
+/* Performance chart */
+.dark-mode .placeholder-chart {
+  border-bottom: 2px solid #334155 !important;
 }

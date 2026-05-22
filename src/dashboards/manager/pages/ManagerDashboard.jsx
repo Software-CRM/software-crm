@@ -10,7 +10,9 @@ import {
   Trash2,
   Check,
   ArrowLeft,
-  Activity
+  Activity,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { formatDate } from '../../../utils/dateUtils';
@@ -32,6 +34,14 @@ import './ManagerDashboard.css';
 
 const ManagerDashboard = ({ user, onLogout }) => {
   const [activeTab, setActiveTab] = useState('overview');
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const saved = localStorage.getItem('crm_theme');
+    return saved ? saved === 'dark' : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('crm_theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
   const [toast, setToast] = useState(null);
 
   const [showNotifications, setShowNotifications] = useState(false);
@@ -164,7 +174,7 @@ const ManagerDashboard = ({ user, onLogout }) => {
   };
 
   return (
-    <div className="manager-dashboard-container">
+    <div className={`manager-dashboard-container ${isDarkMode ? 'dark-mode' : ''}`} data-theme={isDarkMode ? 'dark' : 'light'}>
       {/* Toast Notification */}
       <AnimatePresence>
         {toast && (
@@ -194,6 +204,27 @@ const ManagerDashboard = ({ user, onLogout }) => {
               <Calendar size={16} />
               <span>{formatDate()}</span>
             </div>
+            <button 
+              className="action-icon-btn" 
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              style={{
+                background: 'none',
+                border: '1px solid var(--border, #e2e8f0)',
+                borderRadius: '10px',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: 'var(--text-muted, #64748b)',
+                transition: 'all 0.2s ease',
+                marginRight: '0.5rem'
+              }}
+              aria-label="Toggle Theme"
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <div className="notification-wrapper" ref={notificationRef}>
               <button 
                 className={`action-icon-btn ${showNotifications ? 'active' : ''}`}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
+import './ProjectTracking.css';
 
 const ProjectTracking = () => (
   <div className="client-module-view">

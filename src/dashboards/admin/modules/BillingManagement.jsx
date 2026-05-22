@@ -23,7 +23,7 @@ const plans = [
   { name: 'Enterprise', price: '$499', features: ['Unlimited clients', 'Full analytics suite', '24/7 Dedicated support', 'Custom integrations'], current: true },
 ];
 
-const BillingTab = () => {
+const BillingTab = ({ isDarkMode }) => {
   return (
     <div className="tab-content billing-tab">
       <div className="billing-summary-cards">
@@ -48,7 +48,10 @@ const BillingTab = () => {
             <button className="text-btn">Edit</button>
           </div>
           <div className="method-details">
-            <div className="card-chip-icon">
+            <div 
+              className="card-chip-icon"
+              style={isDarkMode ? { background: '#0F172A', color: '#F8FAFC', border: '1px solid #334155' } : {}}
+            >
               <CreditCard size={32} />
             </div>
             <div className="method-info">

@@ -1,20 +1,20 @@
 .manager-sidebar {
   width: 260px;
   height: 100vh;
-  background: #0f172a;
-  color: white;
+  background: var(--bg-sidebar);
+  color: var(--text-sidebar);
   display: flex;
   flex-direction: column;
   position: fixed;
   left: 0;
   top: 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid var(--sidebar-border);
   z-index: 100;
 }
 
 .manager-sidebar-header {
   padding: 32px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--sidebar-border);
   display: flex;
   justify-content: center;
 }
@@ -48,7 +48,7 @@
   margin-bottom: 4px;
   border: none;
   background: transparent;
-  color: #94a3b8;
+  color: var(--text-sidebar-muted);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -56,12 +56,12 @@
 }
 
 .manager-nav-link:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
+  background: var(--sidebar-hover-bg);
+  color: var(--text-sidebar);
 }
 
 .manager-nav-link.active {
-  background: #3b82f6;
+  background: var(--primary-light);
   color: white;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
@@ -87,10 +87,39 @@
 
 .manager-sidebar-footer {
   padding: 20px 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--sidebar-border);
 }
 
 .logout-btn:hover {
   background: rgba(239, 68, 68, 0.1);
   color: #f87171;
+}
+
+/* Dark Mode Overrides */
+.dark-mode .manager-nav-link {
+  color: #CBD5E1 !important;
+}
+
+.dark-mode .manager-nav-link:hover {
+  color: #F8FAFC !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark-mode .manager-nav-link.active {
+  color: #3B82F6 !important;
+  background: rgba(59, 130, 246, 0.15) !important;
+  box-shadow: none !important;
+}
+
+.dark-mode .manager-nav-link.active .active-dot {
+  background: #3B82F6 !important;
+}
+
+.dark-mode .logout-btn {
+  color: #F87171 !important;
+}
+
+.dark-mode .logout-btn:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #EF4444 !important;
 }

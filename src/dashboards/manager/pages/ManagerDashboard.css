@@ -1896,3 +1896,399 @@
     right: -16px;
   }
 }
+
+/* PREMIUM DARK MODE OVERRIDES */
+.dark-mode {
+  --bg-main: #0F172A;
+  --bg-card: #1E293B;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --border: #334155;
+  --input-bg: #0F172A;
+}
+
+/* Global text: white in dark mode, inherit in light mode */
+.dark-mode .manager-dashboard-container,
+.dark-mode .manager-main-content,
+.dark-mode .tab-container,
+.dark-mode .manager-tab-content {
+  color: #F8FAFC !important;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .user-name-text,
+.dark-mode .user-name,
+.dark-mode .stat-value,
+.dark-mode .meta-item,
+.dark-mode .notif-item-title,
+.dark-mode .notif-detail-title,
+.dark-mode .notif-detail-message,
+.dark-mode .notif-list-title,
+.dark-mode .form-group label,
+.dark-mode .feature-title {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .user-role,
+.dark-mode .user-id-text,
+.dark-mode .stat-label,
+.dark-mode .card-body p,
+.dark-mode .no-team,
+.dark-mode .feature-desc,
+.dark-mode .notif-item-msg,
+.dark-mode .notif-item-time,
+.dark-mode .notif-detail-time {
+  color: #94A3B8 !important;
+}
+
+.dark-mode .manager-card-table,
+.dark-mode .modal-content.side-drawer,
+.dark-mode .centered-modal {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group select {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .modern-table td {
+  border-bottom-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .modern-table tr:hover td {
+  background: #334155 !important;
+}
+
+.dark-mode .modern-table th {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #94A3B8 !important;
+}
+
+.dark-mode .secondary-btn {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .secondary-btn:hover {
+  background: #334155 !important;
+}
+
+.dark-mode .icon-btn-small {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #94A3B8 !important;
+}
+
+.dark-mode .icon-btn-small:hover {
+  background: var(--primary) !important;
+  color: white !important;
+  border-color: var(--primary) !important;
+}
+
+.dark-mode .close-btn {
+  background: #0F172A !important;
+  color: #94A3B8 !important;
+}
+
+.dark-mode .close-btn:hover {
+  background: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .delete-confirm-icon {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #f87171 !important;
+}
+
+/* Base Layout, Sidebar/Header & Panels */
+.dark-mode .manager-main-content {
+  background-color: var(--bg-main) !important;
+}
+
+.dark-mode .manager-top-header {
+  background: #1E293B !important;
+  border-bottom-color: #334155 !important;
+}
+
+.dark-mode .search-bar,
+.dark-mode .search-input-wrapper {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .search-bar input,
+.dark-mode .search-input-wrapper input {
+  background: transparent !important;
+  color: #F8FAFC !important;
+}
+
+/* Stat Cards & Standard Cards */
+.dark-mode .manager-stat-card,
+.dark-mode .manager-card-large,
+.dark-mode .manager-card-small,
+.dark-mode .project-card-premium,
+.dark-mode .sprint-card-premium,
+.dark-mode .chart-card,
+.dark-mode .stat-mini-card,
+.dark-mode .manager-project-card,
+.dark-mode .bug-table-container {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .sprint-header h3,
+.dark-mode .chart-card h3 {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .sprint-stats {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .s-stat span {
+  color: var(--primary-light) !important;
+}
+
+.dark-mode .project-card-premium:hover,
+.dark-mode .manager-project-card:hover {
+  background: #1E293B !important;
+  border-color: var(--primary-light) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Forms & Select Inputs */
+.dark-mode .form-group input,
+.dark-mode .form-group select,
+.dark-mode .premium-input,
+.dark-mode .premium-select,
+.dark-mode .premium-textarea,
+.dark-mode .search-with-filter,
+.dark-mode .mini-select {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .premium-input:focus,
+.dark-mode .premium-select:focus,
+.dark-mode .premium-textarea:focus {
+  background: #1E293B !important;
+  border-color: var(--primary-light) !important;
+}
+
+/* Buttons and Small interactive icons */
+.dark-mode .secondary-btn,
+.dark-mode .icon-btn-small {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+  color: #94A3B8 !important;
+}
+
+.dark-mode .secondary-btn:hover,
+.dark-mode .icon-btn-small:hover {
+  background: #334155 !important;
+  color: #F8FAFC !important;
+  border-color: #94A3B8 !important;
+}
+
+/* Tables & Table Rows */
+.dark-mode .modern-table th {
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+  border-bottom-color: #334155 !important;
+}
+
+.dark-mode .modern-table td {
+  border-bottom-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .modern-table tr:hover td {
+  background: #334155 !important;
+}
+
+/* Talent Selector Grid & Panels */
+.dark-mode .talent-scroll-area,
+.dark-mode .assignment-scroll-area {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .talent-row:hover {
+  background: #334155 !important;
+}
+
+.dark-mode .talent-row.selected {
+  background: rgba(59, 130, 246, 0.15) !important;
+  border-color: var(--primary-light) !important;
+}
+
+.dark-mode .assignment-item {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .a-user strong {
+  color: var(--primary-light) !important;
+}
+
+.dark-mode .talent-avatar {
+  background: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+/* Modals & Overlay Drawers */
+.dark-mode .modal-content,
+.dark-mode .side-drawer,
+.dark-mode .centered-modal {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .modal-header {
+  border-bottom-color: #334155 !important;
+}
+
+.dark-mode .modal-header h3 {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .modal-footer {
+  border-top-color: #334155 !important;
+  background: #1E293B !important;
+}
+
+.dark-mode .delete-confirm-icon {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #f87171 !important;
+}
+
+/* Project Wizard */
+.dark-mode .project-wizard {
+  background: #1E293B !important;
+}
+
+.dark-mode .wizard-sidebar {
+  background: #0F172A !important;
+  border-right: 1px solid #334155 !important;
+}
+
+.dark-mode .wizard-actions {
+  border-top-color: #334155 !important;
+  background: #0F172A !important;
+}
+
+/* User Profile Badge */
+.dark-mode .user-profile-badge {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .user-profile-badge:hover {
+  background: #334155 !important;
+}
+
+.dark-mode .user-info .user-name {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .user-avatar {
+  background: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .empty-state,
+.dark-mode .loading-state {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+  color: #94A3B8 !important;
+}
+
+.dark-mode .empty-state h3 {
+  color: #F8FAFC !important;
+}
+
+/* Small tags and other items */
+.dark-mode .skill-tag {
+  background: #0F172A !important;
+  color: #94A3B8 !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .status-pill.read {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .team-avatar-mini {
+  border-color: #1E293B !important;
+}
+
+.dark-mode .team-avatar-more {
+  background: #0F172A !important;
+  color: #94A3B8 !important;
+  border-color: #1E293B !important;
+}
+
+/* ==========================================================================
+   Premium Status Badge / Pill Dark Mode Overrides
+   ========================================================================== */
+
+/* Gold / Yellow status pill visibility in Dark Mode */
+.dark-mode .status-pill-small.pending,
+.dark-mode .status-badge.pending {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #fbbf24 !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+}
+
+/* Active / In Progress (Green) */
+.dark-mode .status-pill-small.active,
+.dark-mode .status-badge.active,
+.dark-mode .status-badge.in-progress {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+/* On Hold (Red) */
+.dark-mode .status-pill-small.on-hold,
+.dark-mode .status-badge.on-hold {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Completed (Blue) */
+.dark-mode .status-pill-small.completed,
+.dark-mode .status-badge.completed {
+  background: rgba(59, 130, 246, 0.15) !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+}

@@ -161,12 +161,12 @@ const CompanySettingsTab = () => {
   };
 
   const renderSummaryTable = (rows) => (
-    <table className="settings-summary-table" style={{ width: '100%', borderCollapse: 'collapse', marginTop: '16px' }}>
+    <table className="settings-summary-table">
       <tbody>
         {rows.map((row) => (
-          <tr key={row.label} style={{ borderBottom: '1px solid #E5E7EB' }}>
-            <th style={{ textAlign: 'left', padding: '12px 14px', color: '#111827', fontSize: '0.9rem', width: '170px', verticalAlign: 'top' }}>{row.label}</th>
-            <td style={{ padding: '12px 14px', color: '#374151', fontSize: '0.9rem' }}>{row.value}</td>
+          <tr key={row.label}>
+            <th>{row.label}</th>
+            <td>{row.value}</td>
           </tr>
         ))}
       </tbody>

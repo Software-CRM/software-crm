@@ -1,0 +1,122 @@
+/* Billing Styles */
+.billing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.invoice-card {
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inv-num { 
+  font-weight: 700; 
+  color: #1e293b; 
+  font-size: 0.95rem;
+}
+
+.inv-date { 
+  font-size: 0.75rem; 
+  color: #64748b; 
+}
+
+.inv-amount {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 8px 0;
+}
+
+.inv-status-unpaid {
+  color: #ef4444;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  align-self: flex-start;
+}
+
+.download-btn {
+  width: 100%;
+  padding: 10px;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.download-btn:hover {
+  background: #e2e8f0;
+}
+
+/* ==========================================
+   Dark Mode Overrides
+   ========================================== */
+[data-theme='dark'] .invoice-card {
+  background: var(--bg-card);
+  border-color: var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+[data-theme='dark'] .inv-num,
+[data-theme='dark'] .inv-amount {
+  color: var(--text-main);
+}
+
+[data-theme='dark'] .inv-date {
+  color: var(--text-muted);
+}
+
+[data-theme='dark'] .download-btn {
+  background: var(--bg-main) !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .download-btn:hover {
+  background: var(--border) !important;
+}
+
+/* Mirror with .dark-mode selector */
+.dark-mode .invoice-card {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .inv-num,
+.dark-mode .inv-amount {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .inv-date {
+  color: #94A3B8 !important;
+}
+
+.dark-mode .download-btn {
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .download-btn:hover {
+  background: #334155 !important;
+}

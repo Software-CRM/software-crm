@@ -10,7 +10,14 @@
   /* Backgrounds */
   --bg-main: #F8FAFC;
   --bg-card: #FFFFFF;
-  --bg-sidebar: #0F172A;
+  
+  /* Sidebar Specific (Theme Responsive) */
+  --bg-sidebar: #FFFFFF;
+  --text-sidebar: #1E293B;
+  --text-sidebar-muted: #64748B;
+  --sidebar-border: #E2E8F0;
+  --sidebar-hover-bg: rgba(30, 41, 59, 0.04);
+  --sidebar-active-bg: rgba(59, 130, 246, 0.08);
   
   /* Text Colors */
   --text-main: #1E293B;
@@ -47,12 +54,46 @@
 [data-theme='dark'] {
   --bg-main: #0F172A;
   --bg-card: #1E293B;
-  --bg-sidebar: #020617;
+  
+  /* Sidebar Specific (Theme Responsive Dark) */
+  --bg-sidebar: #0F172A;
+  --text-sidebar: #F8FAFC;
+  --text-sidebar-muted: #94A3B8;
+  --sidebar-border: #334155;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.04);
+  --sidebar-active-bg: rgba(59, 130, 246, 0.12);
+  
   --text-main: #F8FAFC;
   --text-muted: #94A3B8;
   --border: #334155;
   --input-bg: #0F172A;
   --shadow-card: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+}
+
+/* Global Form & Input Enhancements for Dark Mode */
+[data-theme='dark'] input,
+[data-theme='dark'] select,
+[data-theme='dark'] textarea {
+  background-color: var(--input-bg);
+  color: var(--text-main);
+  border-color: var(--border);
+}
+
+[data-theme='dark'] option {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+}
+
+/* Premium smooth theme transition scoped strictly to the dashboards */
+.dashboard-root,
+.dashboard-root *,
+.manager-dashboard-container,
+.manager-dashboard-container *,
+.employee-portal-container,
+.employee-portal-container *,
+.client-portal-container,
+.client-portal-container * {
+  transition: background-color 350ms ease, border-color 350ms ease, color 350ms ease, box-shadow 350ms ease;
 }
 
 * {
@@ -106,4 +147,16 @@ input, select, textarea {
 
 #root {
   width: 100%;
+}
+
+/* Global autofill overrides in dark mode to prevent browsers from enforcing white/light backgrounds on saved credentials */
+[data-theme='dark'] input:-webkit-autofill,
+[data-theme='dark'] textarea:-webkit-autofill,
+[data-theme='dark'] select:-webkit-autofill,
+.dark-mode input:-webkit-autofill,
+.dark-mode textarea:-webkit-autofill,
+.dark-mode select:-webkit-autofill {
+  -webkit-text-fill-color: var(--text-main) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--input-bg) inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }

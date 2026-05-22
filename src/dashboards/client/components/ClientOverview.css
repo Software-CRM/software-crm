@@ -1,0 +1,179 @@
+/* ClientOverview Styles */
+.welcome-banner {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  padding: 40px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column: span 2;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.banner-text h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: white !important;
+}
+
+.banner-text p {
+  opacity: 0.7;
+  max-width: 400px;
+  font-size: 0.95rem;
+  color: white !important;
+}
+
+.banner-stats {
+  display: flex;
+  gap: 32px;
+}
+
+.b-stat {
+  text-align: center;
+}
+
+.b-stat span {
+  font-size: 2.5rem;
+  font-weight: 800;
+  display: block;
+}
+
+.b-stat p {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+}
+
+.projects-preview-card, .support-quick-card {
+  background: white;
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+}
+
+.progress-item-box {
+  margin-top: 20px;
+}
+
+.p-info {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-main, #0f172a);
+  margin-bottom: 8px;
+}
+
+.p-bar {
+  height: 8px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.p-fill {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+.support-quick-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  background: #f8fafc;
+}
+
+.support-quick-card .icon {
+  color: #3b82f6;
+  width: 48px;
+  height: 48px;
+}
+
+.support-quick-card h4 {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.support-quick-card p {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.support-btn {
+  width: 100%;
+  background: #0f172a;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.support-btn:hover {
+  background: #1e293b;
+}
+
+/* ==========================================
+   Dark Mode Overrides
+   ========================================== */
+[data-theme='dark'] .projects-preview-card,
+[data-theme='dark'] .support-quick-card {
+  background: var(--bg-card);
+  border-color: var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+[data-theme='dark'] .support-quick-card h4 {
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .support-quick-card p {
+  color: var(--text-muted) !important;
+}
+
+[data-theme='dark'] .support-btn {
+  background: var(--primary-light) !important;
+}
+
+[data-theme='dark'] .p-bar {
+  background: var(--border) !important;
+}
+
+/* Mirror with .dark-mode selector */
+.dark-mode .projects-preview-card,
+.dark-mode .support-quick-card {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .support-quick-card h4 {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .support-quick-card p {
+  color: #94A3B8 !important;
+}
+
+.dark-mode .support-btn {
+  background: #3B82F6 !important;
+}
+
+.dark-mode .p-bar {
+  background: #334155 !important;
+}

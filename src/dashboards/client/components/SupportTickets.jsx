@@ -1,5 +1,6 @@
 import React from 'react';
 import { Plus, MessageCircle } from 'lucide-react';
+import './SupportTickets.css';
 
 const SupportTickets = () => (
   <div className="client-module-view">

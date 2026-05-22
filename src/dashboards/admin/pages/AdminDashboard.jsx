@@ -32,7 +32,14 @@ import './AdminDashboard.css';
 
 const AdminDashboard = ({ user, onLogout }) => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const saved = localStorage.getItem('crm_theme');
+    return saved ? saved === 'dark' : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('crm_theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
   const [showNotifications, setShowNotifications] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [notifications, setNotifications] = useState(() => {
@@ -153,8 +160,8 @@ const AdminDashboard = ({ user, onLogout }) => {
       case 'projects': return <ProjectManagement addNotification={addNotification} />;
       case 'invoices': return <Invoices />;
       case 'reports': return <Reports />;
-      case 'plans': return <Plans />;
-      case 'settings': return <GeneralSettings />;
+      case 'plans': return <Plans isDarkMode={isDarkMode} />;
+      case 'settings': return <GeneralSettings isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />;
       case 'logs': return <Logs />;
       default: return <DashboardOverview />;
     }
@@ -175,7 +182,7 @@ const AdminDashboard = ({ user, onLogout }) => {
   };
 
   return (
-    <div className={`dashboard-root ${isDarkMode ? 'dark-mode' : ''}`}>
+    <div className={`dashboard-root ${isDarkMode ? 'dark-mode' : ''}`} data-theme={isDarkMode ? 'dark' : 'light'}>
       <AdminSidebar 
         activeTab={activeTab} 
         setActiveTab={setActiveTab} 

@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const SettingsTab = () => {
+const SettingsTab = ({ isDarkMode, setIsDarkMode }) => {
   const [activeSubTab, setActiveSubTab] = useState('profile');
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -274,7 +274,11 @@ const SettingsTab = () => {
                       <p className="feature-desc">Switch between light and dark themes for the dashboard.</p>
                     </div>
                     <label className="premium-toggle">
-                      <input type="checkbox" />
+                      <input 
+                        type="checkbox" 
+                        checked={isDarkMode || false} 
+                        onChange={(e) => setIsDarkMode(e.target.checked)} 
+                      />
                       <span className="premium-slider"></span>
                     </label>
                   </div>

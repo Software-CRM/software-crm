@@ -1,0 +1,163 @@
+/* ProjectTracking Styles */
+.client-module-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.module-header h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main, #0f172a);
+}
+
+.module-header p {
+  color: var(--text-muted, #64748b);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.project-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.client-project-card {
+  background: white;
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.client-project-card h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main, #0f172a);
+  margin-bottom: 8px;
+}
+
+.client-project-card p {
+  color: var(--text-muted, #64748b);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.project-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #3b82f6;
+  background: #eff6ff;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.status-badge.active {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #059669;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-badge.active::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+}
+
+.milestones {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.milestone-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  position: relative;
+  cursor: pointer;
+}
+
+.milestone-dot.completed { 
+  background: #10b981; 
+}
+
+.milestone-dot.active { 
+  background: #3b82f6; 
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2); 
+}
+
+.view-details-btn {
+  width: 100%;
+  padding: 12px;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.view-details-btn:hover {
+  background: #e2e8f0;
+}
+
+/* ==========================================
+   Dark Mode Overrides
+   ========================================== */
+[data-theme='dark'] .client-project-card {
+  background: var(--bg-card);
+  border-color: var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+[data-theme='dark'] .milestone-dot {
+  background: var(--border);
+}
+
+[data-theme='dark'] .view-details-btn {
+  background: var(--bg-main) !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .view-details-btn:hover {
+  background: var(--border) !important;
+}
+
+/* Mirror with .dark-mode selector */
+.dark-mode .client-project-card {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .milestone-dot:not(.completed):not(.active) {
+  background: #334155 !important;
+}
+
+.dark-mode .view-details-btn {
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .view-details-btn:hover {
+  background: #334155 !important;
+}

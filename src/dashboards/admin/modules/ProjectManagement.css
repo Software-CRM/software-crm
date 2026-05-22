@@ -515,3 +515,134 @@
   font-style: italic;
 }
 
+/* ==========================================================================
+   Dark Mode Overrides
+   ========================================================================== */
+
+/* 1. Status Pills & Badges Visibility */
+.dark-mode .status-pill-small.pending,
+.dark-mode .status-badge.pending {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #fbbf24 !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+}
+
+.dark-mode .status-pill-small.active,
+.dark-mode .status-badge.active,
+.dark-mode .status-badge.in-progress {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+.dark-mode .status-pill-small.on-hold,
+.dark-mode .status-badge.on-hold {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+.dark-mode .status-pill-small.completed,
+.dark-mode .status-badge.completed {
+  background: rgba(59, 130, 246, 0.15) !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+}
+
+/* 2. Project Creation Wizard / Modal Dialog */
+.dark-mode .project-wizard {
+  background: #1E293B !important;
+  border: 1px solid #334155 !important;
+}
+
+.dark-mode .wizard-sidebar {
+  background: #0F172A !important;
+  border-right-color: #334155 !important;
+}
+
+.dark-mode .wizard-main {
+  background: #1E293B !important;
+}
+
+.dark-mode .wizard-body {
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .wizard-actions {
+  background: #0F172A !important;
+  border-top-color: #334155 !important;
+}
+
+.dark-mode .step-num {
+  background: #334155 !important;
+  color: #94A3B8 !important;
+}
+
+.dark-mode .wizard-step.active .step-num {
+  background: var(--primary-light) !important;
+  color: white !important;
+}
+
+.dark-mode .step-info span {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .step-info p {
+  color: #94A3B8 !important;
+}
+
+.dark-mode .premium-input,
+.dark-mode .premium-textarea,
+.dark-mode .premium-select {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .premium-input:focus,
+.dark-mode .premium-textarea:focus,
+.dark-mode .premium-select:focus {
+  background: #1E293B !important;
+  border-color: var(--primary-light) !important;
+}
+
+.dark-mode .empty-selection {
+  color: #94A3B8 !important;
+}
+
+.dark-mode .talent-card:hover {
+  background: #0F172A !important;
+}
+
+.dark-mode .talent-card.active {
+  background: rgba(59, 130, 246, 0.15) !important;
+  border-color: var(--primary-light) !important;
+}
+
+.dark-mode .talent-scroll-area,
+.dark-mode .assignment-scroll-area {
+  border-color: #334155 !important;
+}
+
+.dark-mode .talent-row:hover {
+  background: #0F172A !important;
+}
+
+.dark-mode .talent-row.selected {
+  background: rgba(59, 130, 246, 0.15) !important;
+}
+
+.dark-mode .assignment-item-minimal {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .a-name {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .static-role-badge {
+  color: #94A3B8 !important;
+}
+

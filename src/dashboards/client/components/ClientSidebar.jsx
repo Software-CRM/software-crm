@@ -12,7 +12,7 @@ import { useCompany } from '../../../context/useCompany';
 import defaultLogo from '../../../assets/logo.png';
 import './ClientSidebar.css';
 
-const ClientSidebar = ({ activeTab, setActiveTab, onLogout }) => {
+const ClientSidebar = ({ activeTab, setActiveTab, onLogout, sidebarOpen, setSidebarOpen }) => {
   const { settings } = useCompany();
 
   const menuItems = [
@@ -24,34 +24,58 @@ const ClientSidebar = ({ activeTab, setActiveTab, onLogout }) => {
     { id: 'documents', label: 'Shared Files', icon: FileText },
   ];
 
+  const handleNavClick = (tabId) => {
+    setActiveTab(tabId);
+    if (setSidebarOpen) {
+      setSidebarOpen(false);
+    }
+  };
+
+  const handleLogoutClick = () => {
+    if (setSidebarOpen) {
+      setSidebarOpen(false);
+    }
+    onLogout();
+  };
+
   return (
-    <aside className="client-sidebar">
-      <div className="client-sidebar-header">
-        <div className="client-logo-wrapper">
-          <img src={settings.logo || defaultLogo} alt={settings.companyName} className="client-logo-img" />
+    <>
+      {/* Dim overlay backdrop visible on mobile/tablets when sidebar is open */}
+      {sidebarOpen && (
+        <div 
+          className="client-sidebar-backdrop" 
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <aside className={`client-sidebar ${sidebarOpen ? 'mobile-open' : ''}`}>
+        <div className="client-sidebar-header">
+          <div className="client-logo-wrapper">
+            <img src={settings.logo || defaultLogo} alt={settings.companyName} className="client-logo-img" />
+          </div>
         </div>
-      </div>
 
-      <nav className="client-sidebar-nav">
-        {menuItems.map((item) => (
-          <button
-            key={item.id}
-            className={`client-nav-link ${activeTab === item.id ? 'active' : ''}`}
-            onClick={() => setActiveTab(item.id)}
-          >
-            <item.icon className="nav-icon" size={20} />
-            <span className="nav-label">{item.label}</span>
+        <nav className="client-sidebar-nav">
+          {menuItems.map((item) => (
+            <button
+              key={item.id}
+              className={`client-nav-link ${activeTab === item.id ? 'active' : ''}`}
+              onClick={() => handleNavClick(item.id)}
+            >
+              <item.icon className="nav-icon" size={20} />
+              <span className="nav-label">{item.label}</span>
+            </button>
+          ))}
+        </nav>
+
+        <div className="client-sidebar-footer">
+          <button className="client-nav-link logout-btn" onClick={handleLogoutClick}>
+            <LogOut className="nav-icon" size={20} />
+            <span className="nav-label">Sign Out</span>
           </button>
-        ))}
-      </nav>
-
-      <div className="client-sidebar-footer">
-        <button className="client-nav-link logout-btn" onClick={onLogout}>
-          <LogOut className="nav-icon" size={20} />
-          <span className="nav-label">Sign Out</span>
-        </button>
-      </div>
-    </aside>
+        </div>
+      </aside>
+    </>
   );
 };
 

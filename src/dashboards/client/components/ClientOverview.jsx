@@ -1,5 +1,6 @@
 import React from 'react';
 import { AlertCircle } from 'lucide-react';
+import './ClientOverview.css';
 
 const ClientOverview = () => (
   <div className="client-dashboard-home">

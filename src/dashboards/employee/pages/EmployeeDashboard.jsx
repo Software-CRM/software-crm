@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
-  Calendar
+  Calendar,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { formatDate } from '../../../utils/dateUtils';
 
@@ -18,6 +20,14 @@ import './EmployeeDashboard.css';
 
 const EmployeeDashboard = ({ user, onLogout }) => {
   const [activeTab, setActiveTab] = useState('overview');
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const saved = localStorage.getItem('crm_theme');
+    return saved ? saved === 'dark' : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('crm_theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
   const [isPunchedIn, setIsPunchedIn] = useState(false);
 
   const renderContent = () => {
@@ -32,7 +42,7 @@ const EmployeeDashboard = ({ user, onLogout }) => {
   };
 
   return (
-    <div className="employee-portal-container">
+    <div className={`employee-portal-container ${isDarkMode ? 'dark-mode' : ''}`} data-theme={isDarkMode ? 'dark' : 'light'}>
       <EmployeeSidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={onLogout} />
       
       <main className="employee-main-content">
@@ -46,6 +56,27 @@ const EmployeeDashboard = ({ user, onLogout }) => {
               <Calendar size={16} />
               <span>{formatDate()}</span>
             </div>
+            <button 
+              className="action-icon-btn" 
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              style={{
+                background: 'none',
+                border: '1px solid var(--border, #e2e8f0)',
+                borderRadius: '10px',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: 'var(--text-muted, #64748b)',
+                transition: 'all 0.2s ease',
+                marginRight: '0.5rem'
+              }}
+              aria-label="Toggle Theme"
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <div className="employee-id-badge">
               <div className="e-avatar">{(user?.fullName || 'EM')[0]}</div>
               <div className="e-info">

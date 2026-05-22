@@ -54,5 +54,4 @@ const EmployeeSidebar = ({ activeTab, setActiveTab, onLogout }) => {
     </aside>
   );
 };
-
 export default EmployeeSidebar;

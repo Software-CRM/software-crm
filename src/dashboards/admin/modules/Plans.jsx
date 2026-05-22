@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  CreditCard, 
-  ArrowUpCircle, 
-  CheckCircle2, 
+import {
+  CreditCard,
+  ArrowUpCircle,
+  CheckCircle2,
   ShieldCheck,
   Zap,
   Crown
@@ -10,33 +10,33 @@ import {
 import { motion } from 'framer-motion';
 
 const plans = [
-  { 
-    name: 'Starter', 
-    price: '$99', 
+  {
+    name: 'Starter',
+    price: '$99',
     icon: Zap,
-    features: ['Up to 10 clients', 'Basic analytics', 'Email support', 'Single user access'], 
+    features: ['Up to 10 clients', 'Basic analytics', 'Email support', 'Single user access'],
     current: false,
     color: '#64748B'
   },
-  { 
-    name: 'Professional', 
-    price: '$299', 
+  {
+    name: 'Professional',
+    price: '$299',
     icon: ShieldCheck,
-    features: ['Up to 50 clients', 'Advanced reports', 'Priority support', 'Team collaboration'], 
+    features: ['Up to 50 clients', 'Advanced reports', 'Priority support', 'Team collaboration'],
     current: false,
     color: '#3B82F6'
   },
-  { 
-    name: 'Enterprise Suite', 
-    price: '$499', 
+  {
+    name: 'Enterprise Suite',
+    price: '$499',
     icon: Crown,
-    features: ['Unlimited clients', 'Full analytics suite', '24/7 Dedicated support', 'Custom integrations'], 
+    features: ['Unlimited clients', 'Full analytics suite', '24/7 Dedicated support', 'Custom integrations'],
     current: true,
     color: '#7C3AED'
   },
 ];
 
-const PlansTab = () => {
+const PlansTab = ({ isDarkMode }) => {
   return (
     <div className="tab-content plans-tab">
       <div className="tab-header-actions">
@@ -68,7 +68,10 @@ const PlansTab = () => {
             <button className="text-btn">Edit</button>
           </div>
           <div className="method-details">
-            <div className="card-chip-icon">
+            <div
+              className="card-chip-icon"
+              style={isDarkMode ? { background: '#0F172A', color: '#F8FAFC', border: '1px solid #334155' } : {}}
+            >
               <CreditCard size={32} />
             </div>
             <div className="method-info">
@@ -82,8 +85,8 @@ const PlansTab = () => {
 
       <div className="plans-comparison-grid">
         {plans.map((plan, idx) => (
-          <motion.div 
-            key={idx} 
+          <motion.div
+            key={idx}
             className={`plan-card ${plan.current ? 'active' : ''}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

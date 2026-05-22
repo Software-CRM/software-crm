@@ -1,5 +1,6 @@
 import React from 'react';
 import { Download } from 'lucide-react';
+import './Billing.css';
 
 const Billing = () => (
   <div className="client-module-view">

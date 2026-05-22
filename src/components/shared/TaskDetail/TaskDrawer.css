@@ -277,3 +277,107 @@
   justify-content: center;
   cursor: pointer;
 }
+
+/* ==========================================
+   CABPTOID DARK MODE TASK DRAWER OVERRIDES
+   ========================================== */
+[data-theme='dark'] .task-drawer {
+  background: var(--bg-card) !important;
+  border-left: 1px solid var(--border) !important;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme='dark'] .drawer-header {
+  border-bottom: 1px solid var(--border) !important;
+}
+
+[data-theme='dark'] .task-id-badge {
+  color: var(--text-muted) !important;
+}
+
+[data-theme='dark'] .task-full-title {
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .status-selector select {
+  background: var(--input-bg) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .status-selector option {
+  background: var(--bg-card) !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .task-details-grid {
+  background: var(--bg-main) !important;
+}
+
+[data-theme='dark'] .detail-item .value {
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .tag-pill {
+  background: var(--border) !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .task-description-section h3 {
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .description-text {
+  color: var(--text-main) !important;
+  opacity: 0.9;
+}
+
+[data-theme='dark'] .task-tabs {
+  border-bottom-color: var(--border) !important;
+}
+
+[data-theme='dark'] .task-tabs button {
+  color: var(--text-muted) !important;
+}
+
+[data-theme='dark'] .task-tabs button.active {
+  color: var(--primary-light) !important;
+  border-bottom-color: var(--primary-light) !important;
+}
+
+[data-theme='dark'] .comment-body {
+  background: var(--bg-main) !important;
+}
+
+[data-theme='dark'] .comment-body p {
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .input-box {
+  border-color: var(--border) !important;
+  background: var(--bg-card) !important;
+}
+
+[data-theme='dark'] .input-box textarea {
+  background: transparent !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme='dark'] .input-footer {
+  background: var(--bg-main) !important;
+  border-top-color: var(--border) !important;
+}
+
+[data-theme='dark'] .formatting-btns button {
+  color: var(--text-muted) !important;
+}
+
+[data-theme='dark'] .close-btn {
+  color: var(--text-muted) !important;
+}
+
+[data-theme='dark'] .close-btn:hover {
+  background: var(--bg-main) !important;
+  color: var(--text-main) !important;
+}
+

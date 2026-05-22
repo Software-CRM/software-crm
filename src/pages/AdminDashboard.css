@@ -1098,8 +1098,8 @@ input:checked+.slider:before {
 }
 
 .upgrade-btn {
-  background: white;
-  color: var(--bg-sidebar);
+  background: var(--primary);
+  color: #F8FAFC;
   padding: 0.75rem 1.5rem;
   border-radius: 12px;
   font-weight: 700;
@@ -1107,6 +1107,12 @@ input:checked+.slider:before {
   align-items: center;
   gap: var(--space-2);
   margin-top: var(--space-4);
+  transition: all 0.2s ease;
+}
+
+.upgrade-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
 }
 
 .payment-method-card {
@@ -1222,7 +1228,7 @@ input:checked+.slider:before {
   border-radius: var(--radius-md);
   font-weight: 700;
   border: 1px solid var(--border);
-  background: white;
+  background: var(--bg-card);
   color: var(--text-main);
 }
 
@@ -1236,6 +1242,25 @@ input:checked+.slider:before {
   background: var(--primary);
   color: white;
   border-color: var(--primary);
+}
+
+/* Dark mode override for plan action buttons */
+.dark-mode .plan-action-btn:not(.current) {
+  background: #1E293B !important;
+  color: #CBD5E1 !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .plan-action-btn:not(.current):hover {
+  background: var(--primary) !important;
+  color: #F8FAFC !important;
+  border-color: var(--primary) !important;
+}
+
+.dark-mode .plan-action-btn.current {
+  background: #0F172A !important;
+  color: #94A3B8 !important;
+  border-color: #334155 !important;
 }
 
 /* RESPONSIVE BREAKPOINTS */
@@ -1275,29 +1300,256 @@ input:checked+.slider:before {
   --border: #334155;
 }
 
+/* Global text color overrides: ALL text white in dark mode */
+.dark-mode,
+.dark-mode * {
+  color: inherit;
+}
+
+.dark-mode .dashboard-root,
+.dark-mode .dashboard-main,
+.dark-mode .dashboard-viewport,
+.dark-mode .tab-content,
+.dark-mode .settings-tab {
+  color: #F8FAFC !important;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: #F8FAFC !important;
+}
+
+.dark-mode p,
+.dark-mode span:not(.nav-pill-label),
+.dark-mode label,
+.dark-mode li,
+.dark-mode td,
+.dark-mode th {
+  color: inherit;
+}
+
+.dark-mode .text-muted,
+.dark-mode .u-role,
+.dark-mode .user-id-text,
+.dark-mode .stat-label,
+.dark-mode .trend-text,
+.dark-mode .feature-desc,
+.dark-mode .section-header-styled p,
+.dark-mode .settings-cancel-btn,
+.dark-mode .notif-item-msg,
+.dark-mode .notif-item-time,
+.dark-mode .notif-detail-time,
+.dark-mode .logo-upload-text .text-xs {
+  color: #94A3B8 !important;
+}
+
+.dark-mode .page-title,
+.dark-mode .u-name,
+.dark-mode .user-name-text,
+.dark-mode .stat-value,
+.dark-mode .feature-title,
+.dark-mode .day-name,
+.dark-mode .section-header-styled h3,
+.dark-mode .tab-header-text h2,
+.dark-mode .notif-list-title,
+.dark-mode .notif-detail-title,
+.dark-mode .notif-detail-message,
+.dark-mode .notif-item-title,
+.dark-mode .form-group label,
+.dark-mode .input-field-group label,
+.dark-mode .form-input-group label,
+.dark-mode .logo-upload-text .font-bold {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .dashboard-main,
+.dark-mode .dashboard-viewport {
+  background-color: var(--bg-main) !important;
+}
+
 .dark-mode .dashboard-topbar,
 .dark-mode .stat-card-new,
 .dark-mode .chart-container-card,
 .dark-mode .activity-panel-card,
 .dark-mode .table-container,
 .dark-mode .settings-section-card,
+.dark-mode .settings-glass-card,
 .dark-mode .payment-method-card,
-.dark-mode .plan-card {
-  background: #1E293B;
-  border-color: #334155;
-  color: #F8FAFC;
+.dark-mode .plan-card,
+.dark-mode .secondary-btn,
+.dark-mode .search-box,
+.dark-mode .filter-dropdown,
+.dark-mode .tab-error-state,
+.dark-mode .modal-content,
+.dark-mode .profile-details-card,
+.dark-mode .security-settings-card,
+.dark-mode .system-status-card,
+.dark-mode .backup-logs-card,
+.dark-mode .plan-card-premium,
+.dark-mode .plan-card.active,
+.dark-mode .pill-active-bg,
+.dark-mode .notif-list-view,
+.dark-mode .notif-detail-view,
+.dark-mode .toast-notification {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
 }
 
-.dark-mode .global-search {
-  background: #0F172A;
+.dark-mode .secondary-btn:hover {
+  background: #334155 !important;
 }
 
-.dark-mode .modern-table th {
-  background: #0F172A;
+.dark-mode .global-search,
+.dark-mode .modern-table th,
+.dark-mode .form-group input,
+.dark-mode .form-group select,
+.dark-mode .input-field-group input,
+.dark-mode .input-field-group textarea,
+.dark-mode .form-input-group input,
+.dark-mode .form-input-group textarea,
+.dark-mode .minimal-select,
+.dark-mode .filter-dropdown select,
+.dark-mode .search-box input {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .form-group input:focus,
+.dark-mode .form-group select:focus,
+.dark-mode .input-field-group input:focus,
+.dark-mode .input-field-group textarea:focus,
+.dark-mode .form-input-group input:focus,
+.dark-mode .form-input-group textarea:focus {
+  background: #1E293B !important;
+  border-color: var(--primary-light) !important;
+}
+
+.dark-mode .modern-table td {
+  border-bottom-color: #334155 !important;
+}
+
+.dark-mode .modern-table tr:hover td {
+  background: #334155 !important;
+}
+
+.dark-mode .user-avatar-small,
+.dark-mode .user-avatar {
+  background: #334155 !important;
+  color: #F8FAFC !important;
 }
 
 .dark-mode .user-profile-dropdown:hover {
   background: #334155;
+}
+
+.dark-mode .shortcut-hint {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #94A3B8 !important;
+}
+
+.dark-mode .role-badge.purple {
+  background: rgba(124, 58, 237, 0.1) !important;
+  color: #c084fc !important;
+  border-color: rgba(124, 58, 237, 0.2) !important;
+}
+
+.dark-mode .role-badge.blue {
+  background: rgba(37, 99, 235, 0.1) !important;
+  color: #93c5fd !important;
+  border-color: rgba(37, 99, 235, 0.2) !important;
+}
+
+.dark-mode .role-badge.green {
+  background: rgba(22, 163, 74, 0.1) !important;
+  color: #6ee7b7 !important;
+  border-color: rgba(22, 163, 74, 0.2) !important;
+}
+
+.dark-mode .role-badge.orange {
+  background: rgba(234, 88, 12, 0.1) !important;
+  color: #fdba74 !important;
+  border-color: rgba(234, 88, 12, 0.2) !important;
+}
+
+.dark-mode .delete-confirm-icon {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #f87171 !important;
+}
+
+.dark-mode .settings-nav-pill {
+  color: #CBD5E1 !important;
+}
+
+.dark-mode .settings-nav-pill:hover {
+  color: #F8FAFC !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark-mode .settings-nav-pill.active {
+  color: #3B82F6 !important;
+}
+
+.dark-mode .nav-pill-icon {
+  background: #0F172A !important;
+  color: #CBD5E1 !important;
+  box-shadow: none !important;
+}
+
+.dark-mode .settings-nav-pill.active .nav-pill-icon {
+  background: var(--primary) !important;
+  color: white !important;
+}
+
+/* Settings inner components */
+.dark-mode .security-feature-card {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .premium-select {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .premium-select:focus {
+  background: #1E293B !important;
+  border-color: var(--primary-light) !important;
+}
+
+.dark-mode .time-inputs input {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+.dark-mode .day-config-row {
+  background: #1E293B !important;
+}
+
+.dark-mode .nav-pill-label {
+  color: inherit !important;
+}
+
+.dark-mode .map-placeholder {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .logo-preview-box {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+}
+
+.dark-mode .settings-action-footer {
+  border-top-color: #334155 !important;
 }
 
 /* User Management Action Buttons */
@@ -2236,10 +2488,122 @@ input:checked+.premium-slider:before {
   border-color: #334155;
 }
 
+/* ==========================================================================
+   Company Settings & Status Pill Dark Mode Adjustments
+   ========================================================================== */
+
+/* 1. Company Settings - Summary Table styling */
+.settings-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.settings-summary-table tr {
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.settings-summary-table th {
+  text-align: left;
+  padding: 12px 14px;
+  color: #111827;
+  font-size: 0.9rem;
+  width: 170px;
+  vertical-align: top;
+}
+
+.settings-summary-table td {
+  padding: 12px 14px;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+/* Dark mode overrides for Company Settings summary tables */
+.dark-mode .settings-summary-table tr {
+  border-bottom: 1px solid #334155 !important;
+}
+
+.dark-mode .settings-summary-table th {
+  color: #F8FAFC !important;
+}
+
+.dark-mode .settings-summary-table td {
+  color: #CBD5E1 !important;
+}
+
+/* 2. Fix Company Settings inputs/textareas background when just viewing */
+.dark-mode .is-viewing .form-input-group input,
+.dark-mode .is-viewing .form-input-group textarea,
+.dark-mode .is-viewing .input-with-prefix.read-only,
+.dark-mode .is-viewing .input-with-prefix.read-only input {
+  background: transparent !important;
+  border-color: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  color: #F8FAFC !important;
+}
+
+/* 3. Gold / Yellow status pill visibility in Dark Mode */
+.dark-mode .status-pill-small.pending,
+.dark-mode .status-badge.pending {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #fbbf24 !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+}
+
+/* Also style other statuses to look premium and consistent in Dark Mode */
+.dark-mode .status-pill-small.active,
+.dark-mode .status-badge.active,
+.dark-mode .status-badge.in-progress {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+.dark-mode .status-pill-small.on-hold,
+.dark-mode .status-badge.on-hold {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+.dark-mode .status-pill-small.completed,
+.dark-mode .status-badge.completed {
+  background: rgba(59, 130, 246, 0.15) !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+}
+
+/* 4. Billing & Plans Dark Mode Updates */
+.dark-mode .upgrade-btn {
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+.dark-mode .upgrade-btn:hover {
+  background: #CBD5E1 !important;
+  transform: translateY(-1px) !important;
+}
+
+.dark-mode .card-chip-icon {
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+  border: 1px solid #334155 !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
   .notifications-dropdown {
     width: calc(100vw - 32px);
     right: -16px;
   }
+}
+
+/* Autofill styling override for forms in Admin dark mode */
+.dark-mode input:-webkit-autofill,
+.dark-mode textarea:-webkit-autofill,
+.dark-mode select:-webkit-autofill {
+  -webkit-text-fill-color: #F8FAFC !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0F172A inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
