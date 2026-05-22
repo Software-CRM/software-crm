@@ -20,6 +20,52 @@ import { projectService } from '../../../services/projectService';
 import { userService } from '../../../services/userService';
 import './ProjectManagement.css';
 
+// Notification Helper Functions
+export const notifySingleManager = (username, title, message, projectDetails = null, type = 'project') => {
+  if (!username || username === 'Unassigned') return;
+  const managerNotifKey = `crm_notifications_${username}`;
+  const currentNotifs = (() => {
+    try {
+      const saved = localStorage.getItem(managerNotifKey);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  })();
+
+  const newNotif = {
+    id: Date.now() + Math.floor(Math.random() * 10000),
+    title,
+    message,
+    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ', ' + new Date().toLocaleDateString(),
+    read: false,
+    type,
+    projectDetails: projectDetails ? {
+      name: projectDetails.name || 'Untitled Project',
+      description: projectDetails.description || '',
+      startDate: projectDetails.startDate || '',
+      endDate: projectDetails.endDate || '',
+      priority: projectDetails.priority || 'MEDIUM',
+      department: projectDetails.department || 'GENERAL',
+      skills: projectDetails.skills || []
+    } : null
+  };
+
+  localStorage.setItem(managerNotifKey, JSON.stringify([newNotif, ...currentNotifs]));
+};
+
+export const notifyAllManagers = async (title, message, projectDetails = null, type = 'project') => {
+  try {
+    const users = await userService.getAllUsers();
+    const managers = users.filter(u => u.role?.toUpperCase() === 'MANAGER');
+    managers.forEach(manager => {
+      notifySingleManager(manager.username, title, message, projectDetails, type);
+    });
+  } catch (err) {
+    console.error("Failed to notify all managers:", err);
+  }
+};
+
 const ProjectManagementTab = ({ showToast = (type, msg) => alert(msg), addNotification }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -65,7 +111,26 @@ const ProjectManagementTab = ({ showToast = (type, msg) => alert(msg), addNotifi
       await projectService.deleteProject(id);
       showToast('success', 'Project deleted successfully');
       
+      // Notify the specifically assigned manager
+      const assignedManager = projectToDelete?.manager?.username || 
+                             (projectToDelete?.managerName !== 'Unassigned' ? projectToDelete?.managerName : null);
+      if (assignedManager) {
+        notifySingleManager(
+          assignedManager,
+          `Project Deleted: ${projectName}`,
+          `The project '${projectName}', which you were managing, has been deleted by the Admin.`,
+          projectToDelete,
+          'system'
+        );
+      }
 
+      // Broadcast to all managers
+      notifyAllManagers(
+        `Project Deleted: ${projectName}`,
+        `Project '${projectName}' has been deleted by the Admin.`,
+        projectToDelete,
+        'system'
+      );
 
       if (addNotification) {
         addNotification(
@@ -285,8 +350,95 @@ const ProjectModal = ({ onClose, onSuccess, initialData, isEditMode, showToast, 
       
       if (isEditMode) {
         await projectService.updateProject(initialData.id, payload);
+
+        // Determine old and new manager usernames
+        const oldManager = initialData?.manager?.username || 
+                           (initialData?.managerName !== 'Unassigned' ? initialData?.managerName : null);
+        const newManager = formData.manager?.username;
+
+        if (oldManager && newManager && oldManager !== newManager) {
+          // Reassigned!
+          // 1. Notify old manager
+          notifySingleManager(
+            oldManager,
+            `Project Reassigned: ${formData.name}`,
+            `You have been unassigned from the project '${formData.name}' as it has been reassigned to ${newManager}.`,
+            formData
+          );
+          // 2. Notify new manager
+          notifySingleManager(
+            newManager,
+            `Project Assigned: ${formData.name}`,
+            `You have been assigned as the Project Manager for project '${formData.name}' (reassigned from ${oldManager}).`,
+            formData
+          );
+          // 3. Broadcast to all managers
+          notifyAllManagers(
+            `Project Reassigned: ${formData.name}`,
+            `Project '${formData.name}' has been reassigned from ${oldManager} to ${newManager} by the Admin.`,
+            formData
+          );
+        } else if (!oldManager && newManager) {
+          // Assigned for first time!
+          notifySingleManager(
+            newManager,
+            `Project Assigned: ${formData.name}`,
+            `You have been assigned as the Project Manager for project '${formData.name}'.`,
+            formData
+          );
+          notifyAllManagers(
+            `Project Assigned: ${formData.name}`,
+            `Project '${formData.name}' has been assigned to ${newManager} by the Admin.`,
+            formData
+          );
+        } else if (oldManager && !newManager) {
+          // Unassigned!
+          notifySingleManager(
+            oldManager,
+            `Project Unassigned: ${formData.name}`,
+            `You have been unassigned from the project '${formData.name}'.`,
+            formData
+          );
+          notifyAllManagers(
+            `Project Unassigned: ${formData.name}`,
+            `Project '${formData.name}' is now unassigned.`,
+            formData
+          );
+        } else if (oldManager === newManager && newManager) {
+          // Updated (no manager change)
+          notifySingleManager(
+            newManager,
+            `Project Updated: ${formData.name}`,
+            `Project details for '${formData.name}' have been updated by the Admin.`,
+            formData
+          );
+          notifyAllManagers(
+            `Project Updated: ${formData.name}`,
+            `Project '${formData.name}' details have been updated by the Admin.`,
+            formData
+          );
+        }
       } else {
         await projectService.createProject(payload);
+        
+        // Admin Project Created: Broadcast to all managers
+        notifyAllManagers(
+          `New Project Created: ${formData.name}`,
+          `A new project '${formData.name}' has been created by the Admin.`,
+          formData
+        );
+
+        // Admin Project Assigned: Notify the assigned manager (if any)
+        const targetManagerUsername = formData.manager?.username;
+        if (targetManagerUsername) {
+          notifySingleManager(
+            targetManagerUsername,
+            `Project Assigned: ${formData.name}`,
+            `You have been assigned as the Project Manager for project '${formData.name}'.`,
+            formData
+          );
+        }
+
         if (addNotification) {
           addNotification(
             "Admin Created a Project",
@@ -294,53 +446,6 @@ const ProjectModal = ({ onClose, onSuccess, initialData, isEditMode, showToast, 
             "project"
           );
         }
-      }
-
-      // Notify the assigned manager if any (use username as stable key)
-      const targetManagerUsername = formData.manager?.username;
-      if (targetManagerUsername) {
-        const managerNotifKey = `crm_notifications_${targetManagerUsername}`;
-        const currentNotifs = (() => {
-          try {
-            const saved = localStorage.getItem(managerNotifKey);
-            return saved ? JSON.parse(saved) : [];
-          } catch {
-            return [];
-          }
-        })();
-
-        const skillsText = Array.isArray(formData.skills) && formData.skills.length > 0
-          ? formData.skills.join(', ')
-          : 'None specified';
-
-        const formattedStartDate = formData.startDate ? new Date(formData.startDate).toLocaleDateString() : 'TBD';
-        const formattedEndDate = formData.endDate ? new Date(formData.endDate).toLocaleDateString() : 'TBD';
-
-        const managerNotif = {
-          id: Date.now(),
-          title: `Project Assignment: ${formData.name}`,
-          message: `You have been assigned as the Project Manager for this project. Here are the details:\n\n` +
-                   `• Name: ${formData.name}\n` +
-                   `• Description: ${formData.description || 'No description available'}\n` +
-                   `• Timeline: ${formattedStartDate} to ${formattedEndDate}\n` +
-                   `• Priority: ${formData.priority || 'MEDIUM'}\n` +
-                   `• Department: ${formData.department || 'GENERAL'}\n` +
-                   `• Required Skills: ${skillsText}`,
-          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ', ' + new Date().toLocaleDateString(),
-          read: false,
-          type: 'project',
-          projectDetails: {
-            name: formData.name,
-            description: formData.description || "",
-            startDate: formData.startDate,
-            endDate: formData.endDate,
-            priority: formData.priority || 'MEDIUM',
-            department: formData.department || "GENERAL",
-            skills: formData.skills || []
-          }
-        };
-
-        localStorage.setItem(managerNotifKey, JSON.stringify([managerNotif, ...currentNotifs]));
       }
 
       showToast('success', `Project ${isEditMode ? 'updated' : 'created'} successfully!`);

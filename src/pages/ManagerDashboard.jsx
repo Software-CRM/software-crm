@@ -9,7 +9,8 @@ import {
   Inbox,
   Trash2,
   Check,
-  ArrowLeft
+  ArrowLeft,
+  Activity
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { formatDate } from '../utils/dateUtils';
@@ -136,6 +137,8 @@ const ManagerDashboard = ({ user, onLogout }) => {
     switch (type) {
       case 'project':
         return <Calendar size={16} className="notif-icon-proj" />;
+      case 'system':
+        return <Activity size={16} className="notif-icon-system" />;
       default:
         return <Bell size={16} className="notif-icon-default" />;
     }
